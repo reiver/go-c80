@@ -36,6 +36,12 @@ func Show() {
 }
 
 // ShowTo will output the raster as an "IMAGE:base64-encoded-png" string to ‘w’.
+//
+// (Where "base64-encoded-png" is replaced with a base64 encoding of the PNG encoding
+// of the raster image.)
+//
+// ShowTo is similar to Show, except it lets you choose where you want to output the
+// "IMAGE:base64-encoded-png" string (using ‘w’).
 func ShowTo(w io.Writer) {
 	fmt.Fprint(w, raster)
 }
