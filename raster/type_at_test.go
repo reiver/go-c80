@@ -41,7 +41,7 @@ func TestTypeAt(t *testing.T) {
 
 				er,eg,eb,ea := palette[index].RGBA()
 
-				if er != ar || eg != ag || eb != ab || ea != aa || true {
+				if er != ar || eg != ag || eb != ab || ea != aa {
 					t.Errorf("For test #%d, actual color for pixel (x,y)=(%d,%d) was not what was expected.", testNumber, x,y)
 					t.Logf("EXPECTED: (r,g,b,a)=(%d,%d,%d,%d)", er,eg,eb,ea)
 					t.Logf("ACTUAL:   (r,g,b,a)=(%d,%d,%d,%d)", ar,ag,ab,aa)
