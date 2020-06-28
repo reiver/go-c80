@@ -5,12 +5,9 @@ import (
 	"strings"
 )
 
-// String makes c80color.Type fit the fmt.Stringer interface.
+// String makes c80color.Array fit the fmt.Stringer interface.
 // And thus make it work with the fmt.Print() family of functions.
-func (receiver Type) String() string {
-	if nil == receiver {
-		return "rgba(0x0,0x0,0x0,0x0)"
-	}
+func (receiver Array) String() string {
 
 	var buffer strings.Builder
 	{

@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestTypeString(t *testing.T) {
+func TestArrayString(t *testing.T) {
 
 	tests := []struct{
 		Color c80color.Array
@@ -99,7 +99,7 @@ func TestTypeString(t *testing.T) {
 
 	for testNumber, test := range tests {
 
-		actual := c80color.Type(test.Color[:]).String()
+		actual := test.Color.String()
 
 		expected := test.Expected
 
