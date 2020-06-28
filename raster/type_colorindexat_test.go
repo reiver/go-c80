@@ -30,6 +30,14 @@ func TestTypeColorIndexAt(t *testing.T) {
 				}
 			}
 		}
-	}
 
+		for offset,actualIndex := range raster {
+
+			if expected, actual := index, actualIndex; expected != actual {
+				t.Errorf("For test #%d, actual color index for pixel at offset=%d was not what was expected.", testNumber, offset)
+				t.Logf("EXPECTED: %d", expected)
+				t.Logf("ACTUAL:   %d", actual)
+			}
+		}
+	}
 }
