@@ -4,5 +4,5 @@ package c80color
 func (receiver Type) RGBA() (r, g, b, a uint32) {
 	const opaque = uint32(0xffff)
 
-	return uint32(receiver.red), uint32(receiver.green), uint32(receiver.blue), opaque
+	return uint32(receiver.red)<<8, uint32(receiver.green)<<8, uint32(receiver.blue)<<8, opaque
 }
