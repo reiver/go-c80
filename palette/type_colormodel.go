@@ -4,8 +4,8 @@ import (
 	"image/color"
 )
 
-// Model, in a sense, convert Type to a built-in Go color.Model.
-func (receiver Type) Model() color.Model {
+// ColorModel, in a sense, convert Type to a built-in Go color.Model.
+func (receiver Type) ColorModel() color.Model {
 
 	var p [Size]color.Color
 
