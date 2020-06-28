@@ -9,14 +9,14 @@ import (
 func TestTypeRGBA(t *testing.T) {
 
 	tests := []struct{
-		Color [4]uint8
+		Color c80color.Array
 		ExpectedRed   uint32
 		ExpectedGreen uint32
 		ExpectedBlue  uint32
 		ExpectedAlpha uint32
 	}{
 		{
-			Color: [4]uint8{0,0,0, 255},
+			Color: c80color.Array{0,0,0, 255},
 			ExpectedRed:   0x0000,
 			ExpectedGreen: 0x0000,
 			ExpectedBlue:  0x0000,
@@ -26,42 +26,42 @@ func TestTypeRGBA(t *testing.T) {
 
 
 		{
-			Color: [4]uint8{0,0,255, 255},
+			Color: c80color.Array{0,0,255, 255},
 			ExpectedRed:   0x0000,
 			ExpectedGreen: 0x0000,
 			ExpectedBlue:  0xffff,
 			ExpectedAlpha: 0xffff,
 		},
 		{
-			Color: [4]uint8{0,255,0, 255},
+			Color: c80color.Array{0,255,0, 255},
 			ExpectedRed:   0x0000,
 			ExpectedGreen: 0xffff,
 			ExpectedBlue:  0x0000,
 			ExpectedAlpha: 0xffff,
 		},
 		{
-			Color: [4]uint8{0,255,255, 255},
+			Color: c80color.Array{0,255,255, 255},
 			ExpectedRed:   0x0000,
 			ExpectedGreen: 0xffff,
 			ExpectedBlue:  0xffff,
 			ExpectedAlpha: 0xffff,
 		},
 		{
-			Color: [4]uint8{255,0,0, 255},
+			Color: c80color.Array{255,0,0, 255},
 			ExpectedRed:   0xffff,
 			ExpectedGreen: 0x0000,
 			ExpectedBlue:  0x0000,
 			ExpectedAlpha: 0xffff,
 		},
 		{
-			Color: [4]uint8{255,0,255, 255},
+			Color: c80color.Array{255,0,255, 255},
 			ExpectedRed:   0xffff,
 			ExpectedGreen: 0x0000,
 			ExpectedBlue:  0xffff,
 			ExpectedAlpha: 0xffff,
 		},
 		{
-			Color: [4]uint8{255,255,0, 255},
+			Color: c80color.Array{255,255,0, 255},
 			ExpectedRed:   0xffff,
 			ExpectedGreen: 0xffff,
 			ExpectedBlue:  0x0000,
@@ -71,7 +71,7 @@ func TestTypeRGBA(t *testing.T) {
 
 
 		{
-			Color: [4]uint8{255,255,255, 255},
+			Color: c80color.Array{255,255,255, 255},
 			ExpectedRed:   0xffff,
 			ExpectedGreen: 0xffff,
 			ExpectedBlue:  0xffff,

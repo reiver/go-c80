@@ -15,7 +15,7 @@ func TestTypePeek(t *testing.T) {
 
 	for testNumber:=0; testNumber<50; testNumber++ {
 
-		var buffer [4]uint8
+		var buffer c80color.Array
 		for i:=0; i<len(buffer); i++ {
 			buffer[i] = uint8(randomness.Intn(256))
 		}
