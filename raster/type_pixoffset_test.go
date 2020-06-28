@@ -1,7 +1,7 @@
-package c80machine_test
+package c80raster_test
 
 import (
-	"github.com/reiver/go-c80/machine"
+	"github.com/reiver/go-c80/raster"
 
 	"testing"
 )
@@ -215,9 +215,9 @@ func TestTypePixOffset(t *testing.T) {
 
 	for testNumber, test := range tests {
 
-		var machine c80machine.Type
+		var raster c80raster.Type
 
-		actual := machine.PixOffset(test.X, test.Y)
+		actual := raster.PixOffset(test.X, test.Y)
 
 		if expected := test.Expected; expected != actual {
 			t.Errorf("For test #%d, actual pix offset was not what was expected.", testNumber)
