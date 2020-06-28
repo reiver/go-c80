@@ -12,7 +12,6 @@ func TestTypeDye(t *testing.T) {
 	for index:=uint8(0); index<c80palette.Size; index++ {
 
 		var buffer [c80raster.Width * c80raster.Height]uint8
-
 		var raster c80raster.Type = c80raster.Type(buffer[:])
 
 		raster.Dye(index)
