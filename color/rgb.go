@@ -14,5 +14,6 @@ func RGB(red uint8, green uint8, blue uint8) Type {
 		red:   red,
 		green: green,
 		blue:  blue,
+		alpha: 0xff,
 	}
 }
