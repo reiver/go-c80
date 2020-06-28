@@ -13,21 +13,18 @@ import (
 func TestTypeModel(t *testing.T) {
 	randomness := rand.New(rand.NewSource( time.Now().UTC().UnixNano() ))
 
-	var colors [c80palette.Size]c80color.Type
-	for index:=0; index<c80palette.Size; index++ {
-		colors[index] = c80color.RGB(
-			uint8(randomness.Intn(256)),
-			uint8(randomness.Intn(256)),
-			uint8(randomness.Intn(256)),
-		)
+	var buffer [c80palette.Size*c80color.Len]uint8
+	for i:=0; i<len(buffer); i++ {
+		buffer[i] = uint8(randomness.Intn(256))
 	}
 
-	var palette c80palette.Type = c80palette.RGBs(colors[:]...)
+	var palette c80palette.Type = c80palette.Type(buffer[:])
 
 	model := palette.Model()
 
+	for index:=uint8(0); index<c80palette.Size; index++ {
+		color := palette.Color(index)
 
-	for index, color := range colors {
 		er, eg, eb, ea := color.RGBA()
 
 		actualColor := model.Convert(color)

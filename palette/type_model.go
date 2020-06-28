@@ -9,8 +9,8 @@ func (receiver Type) Model() color.Model {
 
 	var p [Size]color.Color
 
-	for i, color := range receiver.colors {
-		p[i] = color
+	for index:=uint8(0); index<Size; index++ {
+		p[index] = receiver.Color(index)
 	}
 
 	return color.Palette(p[:])

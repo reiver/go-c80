@@ -13,7 +13,7 @@ import (
 func (receiver Type) Color(index uint8) c80color.Type {
 	index = index % Size
 
-	beginning := index
+	beginning := index * c80color.Len
 	ending := beginning + c80color.Len
 
 	return c80color.Type(receiver[beginning:ending])
