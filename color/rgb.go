@@ -10,10 +10,9 @@ package c80color
 //
 //	color := c80color.RGB(255,199,6)
 func RGB(red uint8, green uint8, blue uint8) Type {
-	return Type{
-		red:   red,
-		green: green,
-		blue:  blue,
-		alpha: 0xff,
-	}
+	alpha := uint8(0xff)
+
+	var color [4]uint8 = [4]uint8{red,green,blue,alpha}
+
+	return color[:]
 }
