@@ -1,7 +1,7 @@
-package c80machine_test
+package c80raster_test
 
 import (
-	"github.com/reiver/go-c80/machine"
+	"github.com/reiver/go-c80/raster"
 
 	"image"
 
@@ -15,9 +15,9 @@ func TestTypeBounds(t *testing.T) {
 		Max: image.Point{X:(128-1) , Y:(192-1) },
 	}
 
-	var machine c80machine.Type
+	var raster c80raster.Type
 
-	actual := machine.Bounds()
+	actual := raster.Bounds()
 
 	if expected != actual {
 		t.Errorf("Actual bounds was not what was expected.")

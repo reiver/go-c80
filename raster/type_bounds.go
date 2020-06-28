@@ -1,14 +1,14 @@
-package c80machine
+package c80raster
 
 import (
 	"image"
 )
 
-// Bounds helps make c80machine.Type fit the image.Image interface.
+// Bounds helps make c80raster.Type fit the image.Image interface.
 //
-// Bounds returns the bounds for c80machine.Type.
+// Bounds returns the bounds for c80raster.Type.
 //
-// c80machine.Type is 128×192, with the top-left corner being (x,y)=(0,0),
+// c80raster.Type is 128×192, with the top-left corner being (x,y)=(0,0),
 // and the bottom-right corner being (x,y)=(127,191).
 func (receiver Type) Bounds() image.Rectangle {
 	return image.Rectangle{
