@@ -2,12 +2,12 @@ package c80
 
 import (
 	"github.com/reiver/go-c80/color"
+	"github.com/reiver/go-c80/machine"
 	"github.com/reiver/go-c80/palette"
-	"github.com/reiver/go-c80/raster"
 )
 
 var (
-	raster c80raster.Type
+	raster c80machine.Type
 )
 
 func init() {

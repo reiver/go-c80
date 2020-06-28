@@ -1,4 +1,4 @@
-package c80raster
+package c80machine
 
 const (
         Width  = 128

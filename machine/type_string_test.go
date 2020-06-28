@@ -1,7 +1,7 @@
-package c80raster_test
+package c80machine_test
 
 import (
-	"github.com/reiver/go-c80/raster"
+	"github.com/reiver/go-c80/machine"
 
 	"testing"
 )
@@ -9,18 +9,18 @@ import (
 func TestTypeString(t *testing.T) {
 
 	tests := []struct{
-		Raster c80raster.Type
+		Machine c80machine.Type
 		Expected string
 	}{
 		{
-			Raster: c80raster.Type{},
+			Machine: c80machine.Type{},
 			Expected: "IMAGE:iVBORw0KGgoAAAANSUhEUgAAAH8AAAC/BAMAAAAlex6UAAAAMFBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABaPxwLAAAAJ0lEQVR4nOzAgQAAAADCsPypMzjBNgAAAAAAAAAAAAAAgPYAAAD//zB/AAGXmfMxAAAAAElFTkSuQmCC",
 		},
 	}
 
 	for testNumber, test := range tests {
 
-		actual := test.Raster.String()
+		actual := test.Machine.String()
 
 		if expected := test.Expected; expected != actual {
 			t.Errorf("For test #%d, the actual value was not what was expected." , testNumber)

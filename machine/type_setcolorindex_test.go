@@ -1,7 +1,7 @@
-package c80raster_test
+package c80machine_test
 
 import (
-	"github.com/reiver/go-c80/raster"
+	"github.com/reiver/go-c80/machine"
 
 	"math/rand"
 	"time"
@@ -13,13 +13,13 @@ func TestTypeSetColorIndex(t *testing.T) {
 
 	randomness := rand.New(rand.NewSource( time.Now().UTC().UnixNano() ))
 
-	var raster c80raster.Type
+	var machine c80machine.Type
 
 	for y := 0; y<192; y++ {
 		for x := 0; x<128; x++  {
 
 			{
-				actual := raster.ColorIndexAt(x,y)
+				actual := machine.ColorIndexAt(x,y)
 
 				if expected := uint8(0); expected != actual {
 					t.Errorf("For test at (x,y)=(%d,%d) actual initial color index not what was expected.", x, y)
@@ -32,9 +32,9 @@ func TestTypeSetColorIndex(t *testing.T) {
 			{
 				index := uint8(randomness.Intn(16))
 
-				raster.SetColorIndex(x,y, index)
+				machine.SetColorIndex(x,y, index)
 
-				actual := raster.ColorIndexAt(x,y)
+				actual := machine.ColorIndexAt(x,y)
 
 				if expected := index; expected != actual {
 					t.Errorf("For test at (x,y)=(%d,%d) actual color index not what was expected.", x, y)
@@ -47,9 +47,9 @@ func TestTypeSetColorIndex(t *testing.T) {
 			{
 				index := uint8(randomness.Intn(16))
 
-				raster.SetColorIndex(x,y, index)
+				machine.SetColorIndex(x,y, index)
 
-				actual := raster.ColorIndexAt(x,y)
+				actual := machine.ColorIndexAt(x,y)
 
 				if expected := index; expected != actual {
 					t.Errorf("For test at (x,y)=(%d,%d) actual color index not what was expected.", x, y)
@@ -62,9 +62,9 @@ func TestTypeSetColorIndex(t *testing.T) {
 			{
 				index := uint8(2)
 
-				raster.SetColorIndex(x,y, index)
+				machine.SetColorIndex(x,y, index)
 
-				actual := raster.ColorIndexAt(x,y)
+				actual := machine.ColorIndexAt(x,y)
 
 				if expected := index; expected != actual {
 					t.Errorf("For test at (x,y)=(%d,%d) actual color index not what was expected.", x, y)

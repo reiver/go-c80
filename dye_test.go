@@ -2,8 +2,8 @@ package c80_test
 
 import (
 	"github.com/reiver/go-c80"
+	"github.com/reiver/go-c80/machine"
 	"github.com/reiver/go-c80/palette"
-	"github.com/reiver/go-c80/raster"
 
 	"testing"
 )
@@ -16,8 +16,8 @@ func TestDye(t *testing.T) {
 
 		c80.Dye(index)
 
-		for y:=0; y<c80raster.Height; y++ {
-			for x:=0; x<c80raster.Width; x++ {
+		for y:=0; y<c80machine.Height; y++ {
+			for x:=0; x<c80machine.Width; x++ {
 				actual := c80.PixelGet(x,y)
 
 				if expected := index; expected != actual {

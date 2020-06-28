@@ -1,4 +1,4 @@
-package c80raster
+package c80machine
 
 import (
 	"github.com/reiver/go-c80/palette"
@@ -10,11 +10,11 @@ func TestTypeDye(t *testing.T) {
 
 	for index:=uint8(0); index<c80palette.Size; index++ {
 
-		var raster Type
+		var machine Type
 
-		raster.Dye(index)
+		machine.Dye(index)
 
-		for offset,actualIndex := range raster.buffer {
+		for offset,actualIndex := range machine.buffer {
 			if expected, actual := index, actualIndex; expected != actual {
 				t.Errorf("For offset=%d, the actual index is not what was expected.", offset)
 				t.Logf("EXPECTED: %d", expected)

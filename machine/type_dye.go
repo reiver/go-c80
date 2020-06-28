@@ -1,4 +1,4 @@
-package c80raster
+package c80machine
 
 // Dye changes the color of the entire raster image
 // to the color represented by the (color) palette index.

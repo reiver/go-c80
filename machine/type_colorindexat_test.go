@@ -1,8 +1,8 @@
-package c80raster_test
+package c80machine_test
 
 import (
 	"github.com/reiver/go-c80/color"
-	"github.com/reiver/go-c80/raster"
+	"github.com/reiver/go-c80/machine"
 	"github.com/reiver/go-c80/palette"
 
 	"math/rand"
@@ -28,14 +28,14 @@ func TestTypeColorIndexAt(t *testing.T) {
 
 		testNumber := index
 
-		var raster c80raster.Type
-		raster.SetPalette(c80palette.RGBs(palette[:]...))
-		raster.Dye(index)
+		var machine c80machine.Type
+		machine.SetPalette(c80palette.RGBs(palette[:]...))
+		machine.Dye(index)
 
-		for y:=0; y<c80raster.Height; y++ {
-			for x:=0; x<c80raster.Width; x++ {
+		for y:=0; y<c80machine.Height; y++ {
+			for x:=0; x<c80machine.Width; x++ {
 
-				actualIndex := raster.ColorIndexAt(x,y)
+				actualIndex := machine.ColorIndexAt(x,y)
 
 				if expected, actual := index, actualIndex; expected != actual {
 					t.Errorf("For test #%d, actual color index for pixel (x,y)=(%d,%d) was not what was expected.", testNumber, x,y)

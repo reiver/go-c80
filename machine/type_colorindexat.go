@@ -1,6 +1,6 @@
-package c80raster
+package c80machine
 
-// ColorIndexAt helps make c80raster.Type fit the built-in Go image.PalettedImage inteface.
+// ColorIndexAt helps make c80machine.Type fit the built-in Go image.PalettedImage inteface.
 //
 // ColorIndexAt returns the index (into the (color) palette) of the pixel at (x,y).
 func (receiver Type) ColorIndexAt(x, y int) uint8 {
