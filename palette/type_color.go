@@ -8,7 +8,13 @@ import (
 //
 // These color palettes only have 16 colors — from 0 to 15.
 // Passing a number greater than 15 will cause it to wrap around.
+//
+// (So, for example, asking for color ‘18’ would give you color ‘2’.)
 func (receiver Type) Color(index uint8) c80color.Type {
+	index = index % Size
 
-	return receiver.colors[index % Size]
+	beginning := index
+	ending := beginning + c80color.Len
+
+	return c80color.Type(receiver[beginning:ending])
 }
