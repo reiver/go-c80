@@ -14,7 +14,6 @@ func TestTypeSetColorIndex(t *testing.T) {
 	randomness := rand.New(rand.NewSource( time.Now().UTC().UnixNano() ))
 
 	var buffer [c80raster.Width*c80raster.Height]uint8
-
 	var raster c80raster.Type = c80raster.Type(buffer[:])
 
 	for y := 0; y<192; y++ {
