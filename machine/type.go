@@ -7,5 +7,5 @@ import (
 // Type represents a virtual machine that has a raster image, and a palette.
 type Type struct {
 	palette c80palette.Type
-	buffer [Width*Height]byte
+	buffer [Width*Height]uint8
 }
