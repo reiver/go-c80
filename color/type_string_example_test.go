@@ -11,7 +11,7 @@ func ExampleType_String() {
 	// This memory will be used to store 16 colors.
 	var memory [16*c80color.Len]uint8
 
-	// The colors stored in ‘memory’ are index from 0 to 15.
+	// The colors stored in ‘memory’ are indexed from 0 to 15.
 	//
 	// Here we are getting the 5th color location in ‘memory’.
 	var colorStorage []uint8
