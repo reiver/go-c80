@@ -1,6 +1,8 @@
 package c80machine
 
 import (
+	"github.com/reiver/go-c80/color"
+
 	"image/color"
 )
 
@@ -10,13 +12,16 @@ import (
 // as a built-in Go color.Color (rather than c80's built in color type).
 func (receiver Type) At(x int, y int) color.Color {
 
-	if !receiver.inBounds(x,y) {
-		return color.RGBA{}
+	raster := receiver.Raster(0)
+	if nil == raster {
+		return c80color.Array{0,0,0,0}
 	}
 
-	offset := receiver.PixOffset(x,y)
+	if !raster.InBounds(x,y) {
+		return c80color.Array{0,0,0,0}
+	}
 
-	paletteIndex := receiver.Raster(0)[offset]
+	paletteIndex := raster.ColorIndexAt(x,y)
 
 	return receiver.Palette().Color(paletteIndex)
 }

@@ -18,14 +18,3 @@ func (receiver Type) Bounds() image.Rectangle {
 		Max: image.Point{ X:(c80raster.Width-1) , Y:(c80raster.Height-1) ,},
 	}
 }
-
-func (receiver Type) inBounds(x int, y int) bool {
-	if c80raster.Width <= x {
-		return false
-	}
-	if c80raster.Height <= y {
-		return false
-	}
-
-	return true
-}
