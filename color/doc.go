@@ -3,27 +3,34 @@ Package c80color provides a type used for dealing with colors.
 
 The colors are in RGBA format, where each of the 4 components is a uint8.
 
+Usage
+
 Most of the time you would probably not use c80color.Type by itself.
-But instead would use a c80color.Type when using c80palette.Type.
+But instead would use a c80color.Type when using c80palette.Type
+from a c80machine.Type, with code like the following:
 
-For example, this is a typical use case:
-
-	var palette c80palette.Type
+	var machine c80machine.Type
 	
 	// ...
 	
-	var color c80color.Type = palette.Color(index)
-
-Common things you might do include:
-
 	// Set color in palette at ‘index’ to rgba(41,173,255, 255) — i.e., #29ADFF.
-	palette.Color(index).Poke(41, 173, 255, 255)
+	machine.Palette().Color(index).Poke(41, 173, 255, 255)
 
-Or:
+In that code, a c80machine.Type is returned from:
 
-	for index:=0; index<c80palette.Size; index++ {
+	machine.Palette().Color(index)
+
+Listing
+
+If you wanted to list out all the colors in a palette, you could do that with similar to:
+
+	var machine c80machine.Type
+	
+	// ...
+	
+	for index:=uint8(0); index<c80palette.Size; index++ {
 		
-		color := palette.Color(index)
+		color := machine.Palette().Color(index)
 		
 		fmt.Printf("Color №%d is %s", index, color)
 	}
@@ -46,6 +53,5 @@ Or:
 	// Color №13 is rgba(255,0,255,255)
 	// Color №14 is rgba(0,255,255,255)
 	// Color №15 is rgba(255,255,255,255)
-
 */
 package c80color
