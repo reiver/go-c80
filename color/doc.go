@@ -16,7 +16,7 @@ from a c80machine.Type, with code like the following:
 	// Set color in palette at ‘index’ to rgba(41,173,255, 255) — i.e., #29ADFF.
 	machine.Palette().Color(index).Poke(41, 173, 255, 255)
 
-In that code, a c80machine.Type is returned from:
+In that code, a c80color.Type is returned from:
 
 	machine.Palette().Color(index)
 
