@@ -11,7 +11,7 @@ type Type struct {
 	memory [Len]uint8
 }
 
-func (receiver Type) Palette() c80palette.Type {
+func (receiver *Type) Palette() c80palette.Type {
 	beginning := 0
 	ending    := beginning + c80palette.Len
 
