@@ -1,28 +1,47 @@
 /*
 Package c80palette provides a type for dealing with (color) palettes.
 
-Setting Color In Palette
+These types of (color) palettes have 16 colors in the palette.
 
-To set a color in a palette, you can do something like the following:
+Usage
 
-	var palette c80palette.Type
+Most of the time you would probably not use c80palette.Type by itself.
+But instead would use a c80palette.Type from a c80machine.Type,
+with code like the following:
+
+	var machine c80machine.Type
 	
 	// ...
 	
 	// Set color in palette at ‘index’ to rgba(41,173,255, 255) — i.e., #29ADFF.
-	palette.Color(index).Poke(41, 173, 255, 255)
+	machine.Palette().Color(index).Poke(41, 173, 255, 255)
 
-Listing All Colors In Palette
+In that code, a c80palette.Type is returned from:
 
-To list all the colors in a (color) palette, you can do something like the following:
+	machine.Palette().Color(index)
 
-	var palette c80palette.Type
+Setting Color In Palette
+
+To set a color in a palette, you can do something like the following:
+
+	var machine c80machine.Type
 	
 	// ...
 	
-	for index:=0; index<c80palette.Size; index++ {
+	// Set color in palette at ‘index’ to rgba(41,173,255, 255) — i.e., #29ADFF.
+	machine.Palette().Color(index).Poke(41, 173, 255, 255)
+
+Listing All Colors In Palette
+
+If you wanted to list out all the colors in a palette, you could do that with similar to:
+
+	var machine c80machine.Type
+	
+	// ...
+	
+	for index:=uint8(0); index<c80palette.Size; index++ {
 		
-		color := palette.Color(index)
+		color := machine.Palette().Color(index)
 		
 		fmt.Printf("Color №%d is %s", index, color)
 	}
@@ -45,6 +64,5 @@ To list all the colors in a (color) palette, you can do something like the follo
 	// Color №13 is rgba(255,0,255,255)
 	// Color №14 is rgba(0,255,255,255)
 	// Color №15 is rgba(255,255,255,255)
-
 */
 package c80palette
