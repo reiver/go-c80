@@ -9,11 +9,7 @@ func (receiver *Array) Pixel(x int, y int) c80pixel.Type {
 		return nil
 	}
 
-	offset := Offset(x,y)
+	pixel := Type(receiver[:])
 
-	if len(*receiver) <= offset {
-		return nil
-	}
-
-	return (*receiver)[offset:offset+c80pixel.Len]
+	return pixel.Pixel(x,y)
 }
