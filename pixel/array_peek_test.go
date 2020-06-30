@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestArrayPeek(t *testing.T) {
+func TestArray_Peek(t *testing.T) {
 
 	tests := []struct{
 		Value c80pixel.Array

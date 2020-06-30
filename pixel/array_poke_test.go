@@ -9,7 +9,7 @@ import (
 	"testing"
 )
 
-func TestArrayPoke(t *testing.T) {
+func TestArray_Poke(t *testing.T) {
 
 	randomness := rand.New(rand.NewSource( time.Now().UTC().UnixNano() ))
 

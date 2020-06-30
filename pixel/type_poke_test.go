@@ -9,7 +9,7 @@ import (
 	"testing"
 )
 
-func TestTypePoke(t *testing.T) {
+func TestType_Poke(t *testing.T) {
 
 	randomness := rand.New(rand.NewSource( time.Now().UTC().UnixNano() ))
 
