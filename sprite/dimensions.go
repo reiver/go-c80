@@ -1,6 +1,6 @@
 package c80sprite
 
-var (
+const (
 	Width  = 8
 	Height = 8
 )
