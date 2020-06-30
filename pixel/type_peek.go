@@ -1,6 +1,6 @@
 package c80pixel
 
-func (receiver Type) Peek() uint8 {
+func (receiver Type) Peek() (index uint8) {
 	if nil == receiver {
 		return 0
 	}
