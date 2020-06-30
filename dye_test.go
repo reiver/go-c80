@@ -16,8 +16,8 @@ func TestDye(t *testing.T) {
 
 		c80.Dye(index)
 
-		for y:=0; y<c80machine.Height; y++ {
-			for x:=0; x<c80machine.Width; x++ {
+		for y:=0; y<c80raster.Height; y++ {
+			for x:=0; x<c80raster.Width; x++ {
 				actual := c80.PixelGet(x,y)
 
 				if expected := index; expected != actual {
