@@ -10,4 +10,4 @@ The slice- and array- indexing of the pixels of the sprite is as follows:
 	 8  9 10 11
 	12 13 14 15
 */
-package c80pixel
+package c80sprite8x8
