@@ -8,8 +8,6 @@ import (
 	"github.com/reiver/go-c80/sheet32x32"
 )
 
-const NumberOfRasters = 3
-
 const (
 	PTR_PALETTE      = 0
 	LEN_PALETTE      = c80palette.Len
@@ -17,7 +15,10 @@ const (
 	PTR_FONTS        = PTR_PALETTE      + LEN_PALETTE
 	LEN_FONTS        = c80sheet8x8.Len
 
-	PTR_SPRITES8x8   = PTR_FONTS        + LEN_FONTS
+	PTR_TILES        = PTR_FONTS        + LEN_FONTS
+	LEN_TILES        = c80sheet8x8.Len
+
+	PTR_SPRITES8x8   = PTR_TILES        + LEN_TILES
 	LEN_SPRITES8x8   = c80sheet8x8.Len
 
 	PTR_SPRITES8x16  = PTR_SPRITES8x8   + LEN_SPRITES8x8
@@ -31,17 +32,14 @@ const (
 
 	PTR_RASTER1      = PTR_RASTER0      + LEN_RASTER0
 	LEN_RASTER1      = c80raster.Len
-
-	PTR_RASTER2      = PTR_RASTER1      + LEN_RASTER1
-	LEN_RASTER2      = c80raster.Len
 )
 
 const Len =
 	LEN_PALETTE      +
 	LEN_FONTS        +
+	LEN_TILES        +
 	LEN_SPRITES8x8   +
 	LEN_SPRITES8x16  +
 	LEN_SPRITES32x32 +
 	LEN_RASTER0      +
-	LEN_RASTER1      +
-	LEN_RASTER2
+	LEN_RASTER1

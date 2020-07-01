@@ -29,6 +29,14 @@ func (receiver *Type) Fonts() c80sheet8x8.Type {
 	return receiver.memory[beginning:ending]
 }
 
+// Tiles provides access to the machine's sprite sheet for 8x8 pixel sprite (background) tiles.
+func (receiver *Type) Tiles() c80sheet8x8.Type {
+	beginning := PTR_TILES
+	ending    := beginning + LEN_TILES
+
+	return receiver.memory[beginning:ending]
+}
+
 // Sprites8x8 provides access to the machine's sprite sheet for 8x8 pixel sprites.
 func (receiver *Type) Sprites8x8() c80sheet8x8.Type {
 	beginning := PTR_SPRITES8x8
@@ -65,14 +73,6 @@ func (receiver *Type) Raster0() c80raster.Type {
 func (receiver *Type) Raster1() c80raster.Type {
 	beginning := PTR_RASTER1
 	ending    := beginning + LEN_RASTER1
-
-	return receiver.memory[beginning:ending]
-}
-
-// Raster2 provides access to one of the machine's default raster — raster №2.
-func (receiver *Type) Raster2() c80raster.Type {
-	beginning := PTR_RASTER2
-	ending    := beginning + LEN_RASTER2
 
 	return receiver.memory[beginning:ending]
 }
