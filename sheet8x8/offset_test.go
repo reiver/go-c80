@@ -1,4 +1,4 @@
-package c80sheet
+package c80sheet8x8
 
 import (
 	"testing"
