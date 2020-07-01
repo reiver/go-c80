@@ -4,7 +4,7 @@ func XY(offset int) (x int, y int) {
 	offset = offset % Len
 
 	x = offset % Width
-	y = offset / Height
+	y = offset / Width
 
 	return x, y
 }
