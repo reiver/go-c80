@@ -8,40 +8,6 @@ import (
 	"github.com/reiver/go-c80/sheet32x32"
 )
 
-const NumberOfRasters = 3
-
-const (
-	PTR_PALETTE     = 0
-	LEN_PALETTE     = c80palette.Len
-
-	PTR_SPRITES8x8  = PTR_PALETTE      + LEN_PALETTE
-	LEN_SPRITES8x8  = c80sheet8x8.Len
-
-	PTR_SPRITES8x16 = PTR_SPRITES8x8   + LEN_SPRITES8x8
-	LEN_SPRITES8x16 = c80sheet8x16.Len
-
-	PTR_SPRITES32x32 = PTR_SPRITES8x16 + LEN_SPRITES8x16
-	LEN_SPRITES32x32 = c80sheet32x32.Len
-
-	PTR_RASTER0 = PTR_SPRITES32x32     + LEN_SPRITES32x32
-	LEN_RASTER0 = c80raster.Len
-
-	PTR_RASTER1 = PTR_RASTER0          + LEN_RASTER0
-	LEN_RASTER1 = c80raster.Len
-
-	PTR_RASTER2 = PTR_RASTER1          + LEN_RASTER1
-	LEN_RASTER2 = c80raster.Len
-)
-
-const Len =
-	LEN_PALETTE      +
-	LEN_SPRITES8x8   +
-	LEN_SPRITES8x16  +
-	LEN_SPRITES32x32 +
-	LEN_RASTER0      +
-	LEN_RASTER1      +
-	LEN_RASTER2
-
 // Type represents a fantasy virtual machine.
 type Type struct {
 	memory [Len]uint8
