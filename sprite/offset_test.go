@@ -225,6 +225,135 @@ func TestOffset(t *testing.T) {
 			Y:         4,
 			Expected:  39,
 		},
+
+
+
+		{
+			X:         0,
+			Y:         5,
+			Expected:  40,
+		},
+		{
+			X:         1,
+			Y:         5,
+			Expected:  41,
+		},
+		{
+			X:         2,
+			Y:         5,
+			Expected:  42,
+		},
+		{
+			X:         3,
+			Y:         5,
+			Expected:  43,
+		},
+		{
+			X:         4,
+			Y:         5,
+			Expected:  44,
+		},
+		{
+			X:         5,
+			Y:         5,
+			Expected:  45,
+		},
+		{
+			X:         6,
+			Y:         5,
+			Expected:  46,
+		},
+		{
+			X:         7,
+			Y:         5,
+			Expected:  47,
+		},
+
+
+
+		{
+			X:         0,
+			Y:         6,
+			Expected:  48,
+		},
+		{
+			X:         1,
+			Y:         6,
+			Expected:  49,
+		},
+		{
+			X:         2,
+			Y:         6,
+			Expected:  50,
+		},
+		{
+			X:         3,
+			Y:         6,
+			Expected:  51,
+		},
+		{
+			X:         4,
+			Y:         6,
+			Expected:  52,
+		},
+		{
+			X:         5,
+			Y:         6,
+			Expected:  53,
+		},
+		{
+			X:         6,
+			Y:         6,
+			Expected:  54,
+		},
+		{
+			X:         7,
+			Y:         6,
+			Expected:  55,
+		},
+
+
+
+		{
+			X:         0,
+			Y:         7,
+			Expected:  56,
+		},
+		{
+			X:         1,
+			Y:         7,
+			Expected:  57,
+		},
+		{
+			X:         2,
+			Y:         7,
+			Expected:  58,
+		},
+		{
+			X:         3,
+			Y:         7,
+			Expected:  59,
+		},
+		{
+			X:         4,
+			Y:         7,
+			Expected:  60,
+		},
+		{
+			X:         5,
+			Y:         7,
+			Expected:  61,
+		},
+		{
+			X:         6,
+			Y:         7,
+			Expected:  62,
+		},
+		{
+			X:         7,
+			Y:         7,
+			Expected:  63,
+		},
 	}
 
 	for testNumber, test := range tests {
