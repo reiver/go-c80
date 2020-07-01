@@ -1,7 +1,7 @@
-package c80sprite_test
+package c80sprite8x8_test
 
 import (
-	"github.com/reiver/go-c80/sprite"
+	"github.com/reiver/go-c80/sprite8x8"
 
 	"math/rand"
 	"time"
@@ -13,7 +13,7 @@ func TestArray_Pixel(t *testing.T) {
 
 	randomness := rand.New(rand.NewSource( time.Now().UTC().UnixNano() ))
 
-	var sprite c80sprite.Array
+	var sprite c80sprite8x8.Array
 
 	for i:=0; i<len(sprite); i++ {
 		sprite[i] = uint8(randomness.Intn(16))
@@ -22,8 +22,8 @@ func TestArray_Pixel(t *testing.T) {
 	{
 		numNotZero := 0
 
-		for y:=0; y<c80sprite.Height; y++ {
-			for x:=0; x<c80sprite.Width; x++ {
+		for y:=0; y<c80sprite8x8.Height; y++ {
+			for x:=0; x<c80sprite8x8.Width; x++ {
 				index := sprite.Pixel(x,y).Peek()
 
 				if 0 != index {
@@ -39,8 +39,8 @@ func TestArray_Pixel(t *testing.T) {
 		}
 	}
 
-	for y:=0; y<c80sprite.Height; y++ {
-		for x:=0; x<c80sprite.Width; x++ {
+	for y:=0; y<c80sprite8x8.Height; y++ {
+		for x:=0; x<c80sprite8x8.Width; x++ {
 
 			expectedIndex := uint8(randomness.Intn(16))
 

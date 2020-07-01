@@ -1,4 +1,4 @@
-package c80sprite
+package c80sprite8x8
 
 import (
 	"github.com/reiver/go-c80/pixel"

@@ -1,7 +1,7 @@
-package c80sprite_test
+package c80sprite8x8_test
 
 import (
-	"github.com/reiver/go-c80/sprite"
+	"github.com/reiver/go-c80/sprite8x8"
 
 	"testing"
 )
@@ -358,7 +358,7 @@ func TestOffset(t *testing.T) {
 
 	for testNumber, test := range tests {
 
-		actual := c80sprite.Offset(test.X, test.Y)
+		actual := c80sprite8x8.Offset(test.X, test.Y)
 
 		expected := test.Expected
 
