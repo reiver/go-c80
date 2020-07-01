@@ -1,6 +1,6 @@
 package c80raster
 
 const (
-        Width  = 128
-        Height = 192
+        Width  = 256
+        Height = 384
 )
