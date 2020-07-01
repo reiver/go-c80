@@ -44,7 +44,7 @@ func TestTypeAt(t *testing.T) {
 
 			index := uint8(randomness.Intn(16))
 
-			machine.Raster(0).SetColorIndex(x, y, index)
+			machine.Raster0().SetColorIndex(x, y, index)
 		}
 	}
 
@@ -54,7 +54,7 @@ func TestTypeAt(t *testing.T) {
 		for y:=0; y<c80raster.Height; y++ {
 			for x:=0; x<c80raster.Width; x++ {
 
-				index := machine.Raster(0).ColorIndexAt(x,y)
+				index := machine.Raster0().ColorIndexAt(x,y)
 
 				if 0 != index {
 					numNotZero++
@@ -78,7 +78,7 @@ func TestTypeAt(t *testing.T) {
 
 		er,eg,eb,ea := color.RGBA()
 
-		machine.Raster(0).SetColorIndex(x,y,index)
+		machine.Raster0().SetColorIndex(x,y,index)
 
 		ar,ag,ab,aa := machine.At(x,y).RGBA()
 

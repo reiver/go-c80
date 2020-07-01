@@ -12,7 +12,7 @@ import (
 // as a built-in Go color.Color (rather than c80's built in color type).
 func (receiver Type) At(x int, y int) color.Color {
 
-	raster := receiver.Raster(0)
+	raster := receiver.Raster0()
 	if nil == raster {
 		return c80color.Array{0,0,0,0}
 	}
