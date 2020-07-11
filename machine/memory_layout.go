@@ -6,6 +6,7 @@ import (
 	"github.com/reiver/go-c80/sheet8x8"
 	"github.com/reiver/go-c80/sheet8x16"
 	"github.com/reiver/go-c80/sheet32x32"
+	"github.com/reiver/go-c80/textmatrix"
 )
 
 const (
@@ -27,7 +28,10 @@ const (
 	PTR_SPRITES32x32 = PTR_SPRITES8x16  + LEN_SPRITES8x16
 	LEN_SPRITES32x32 = c80sheet32x32.Len
 
-	PTR_RASTER0      = PTR_SPRITES32x32 + LEN_SPRITES32x32
+	PTR_TEXTMATRIX   = PTR_SPRITES32x32 + LEN_SPRITES32x32
+	LEN_TEXTMATRIX   = c80textmatrix.Len
+
+	PTR_RASTER0      = PTR_TEXTMATRIX   + LEN_TEXTMATRIX
 	LEN_RASTER0      = c80raster.Len
 
 	PTR_RASTER1      = PTR_RASTER0      + LEN_RASTER0
@@ -41,5 +45,6 @@ const Len =
 	LEN_SPRITES8x8   +
 	LEN_SPRITES8x16  +
 	LEN_SPRITES32x32 +
+	LEN_TEXTMATRIX   +
 	LEN_RASTER0      +
 	LEN_RASTER1

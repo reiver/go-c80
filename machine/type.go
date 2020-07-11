@@ -61,6 +61,14 @@ func (receiver *Type) Sprites32x32() c80sheet32x32.Type {
 	return receiver.memory[beginning:ending]
 }
 
+// TextMatrix provides access to the machine's text matrix.
+func (receiver *Type) TextMatrix() c80raster.Type {
+	beginning := PTR_TEXTMATRIX
+	ending    := beginning + LEN_TEXTMATRIX
+
+	return receiver.memory[beginning:ending]
+}
+
 // Raster0 provides access to one of the machine's default raster — raster №0.
 func (receiver *Type) Raster0() c80raster.Type {
 	beginning := PTR_RASTER0
