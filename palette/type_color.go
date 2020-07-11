@@ -10,11 +10,33 @@ import (
 // Passing a number greater than 63 will cause it to wrap around.
 //
 // (So, for example, asking for color ‘66’ would give you color ‘2’.)
-func (receiver Type) Color(index uint8) c80color.Type {
+func (receiver Type) Color(index uint8) (color c80color.Type) {
+	if nil == receiver {
+		return nil
+	}
+
+	defer func() {
+		if r := recover(); nil != r {
+			color = nil
+		}
+	}()
+
 	index = index % Size
 
-	beginning := index * c80color.Len
+	beginning := int(index) * c80color.Len
 	ending := beginning + c80color.Len
+
+	{
+		length := len(receiver)
+
+		if length <= int(beginning) {
+			return nil
+		}
+
+		if length < int(ending) {
+			return nil
+		}
+	}
 
 	return c80color.Type(receiver[beginning:ending])
 }
