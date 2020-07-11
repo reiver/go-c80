@@ -6,10 +6,10 @@ import (
 
 // Color returns the color in the palette at ‘index’.
 //
-// These color palettes only have 16 colors — from 0 to 15.
-// Passing a number greater than 15 will cause it to wrap around.
+// These color palettes only have 64 colors — from 0 to 63.
+// Passing a number greater than 63 will cause it to wrap around.
 //
-// (So, for example, asking for color ‘18’ would give you color ‘2’.)
+// (So, for example, asking for color ‘66’ would give you color ‘2’.)
 func (receiver Type) Color(index uint8) c80color.Type {
 	index = index % Size
 

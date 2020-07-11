@@ -14,4 +14,4 @@ package c80palette
 //		
 //		//@TODO
 //	}
-const Size = 16
+const Size = 64

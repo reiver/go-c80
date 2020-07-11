@@ -1,7 +1,7 @@
 /*
 Package c80palette provides a type for dealing with (color) palettes.
 
-These types of (color) palettes have 16 colors in the palette.
+These types of (color) palettes have 64 colors in the palette.
 
 Usage
 
