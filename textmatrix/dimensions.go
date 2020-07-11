@@ -7,5 +7,5 @@ import (
 const (
         Width  = 32
         Height = 32
-	Depth  = unsafe.Sizeof(rune(0))
+	Depth  = int(unsafe.Sizeof(rune(0)))
 )
