@@ -9,7 +9,7 @@ import (
 func ExampleType_Color() {
 
 	// This memory will be used for the palette.
-	// This palette will store 16 colors.
+	// This palette will store 64 colors.
 	var memory [c80palette.Len]uint8
 
 	var palette c80palette.Type = c80palette.Type(memory[:])
@@ -18,7 +18,7 @@ func ExampleType_Color() {
 	//
 	// (“RGBA” = Red, Green, Blue, Alpha.)
 	//
-	// The colors in the palette are indexed from 0 to 15.
+	// The colors in the palette are indexed from 0 to 63.
 	//
 	// So, here, color №5 is rgba(118,38,113,255).
 	//
