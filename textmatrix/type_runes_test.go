@@ -14,6 +14,20 @@ func TestType_Runes(t *testing.T) {
 
 	runes := textmatrix.Runes()
 
+	if expected, actual := len(buffer)/4, len(runes); expected != actual {
+		t.Errorf("The actual len(runes) is not what was expected.")
+		t.Log("EXPECTED:", expected)
+		t.Log("ACTUAL:  ", actual)
+		return
+	}
+
+	if expected, actual := cap(buffer)/4, cap(runes); expected != actual {
+		t.Errorf("The actual len(runes) is not what was expected.")
+		t.Log("EXPECTED:", expected)
+		t.Log("ACTUAL:  ", actual)
+		return
+	}
+
 	runes[ 0] = 'A'
 	runes[ 1] = 'B'
 	runes[ 2] = 'C'
