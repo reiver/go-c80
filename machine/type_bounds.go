@@ -14,7 +14,7 @@ import (
 // and the bottom-right corner being (x,y)=(127,191).
 func (receiver Type) Bounds() image.Rectangle {
 	return image.Rectangle{
-		Min: image.Point{ X:0                   , Y:0                    ,},
-		Max: image.Point{ X:(c80raster.Width-1) , Y:(c80raster.Height-1) ,},
+		Min: image.Point{ X:0               , Y:0                ,},
+		Max: image.Point{ X:c80raster.Width , Y:c80raster.Height ,},
 	}
 }

@@ -11,8 +11,8 @@ import (
 func TestTypeBounds(t *testing.T) {
 
 	expected := image.Rectangle{
-		Min: image.Point{X:0       , Y:0       },
-		Max: image.Point{X:(128-1) , Y:(192-1) },
+		Min: image.Point{X:0     , Y:0       },
+		Max: image.Point{X:(256) , Y:(256+32) },
 	}
 
 	var machine c80machine.Type
