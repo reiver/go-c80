@@ -8,6 +8,18 @@ import (
 // Type represents a text matrix.
 type Type []uint8
 
+func (receiver Type) Clear() {
+	if nil == receiver {
+		return
+	}
+
+	runes := receiver.Runes()
+
+	for i:=0; i<len(runes); i++ {
+		runes[i] = ' '
+	}
+}
+
 func (receiver Type) Runes() []rune {
 	if nil == receiver {
 		return nil
