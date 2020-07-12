@@ -2,6 +2,7 @@
 Package c80color provides a type used for dealing with colors.
 
 The colors are in RGBA format, where each of the 4 components is a uint8.
+So that the size of an RGBA color is 4× the size of a uint8.
 
 Usage
 
