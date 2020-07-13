@@ -6,10 +6,7 @@ import (
 
 // Color returns the color in the palette at ‘index’.
 //
-// These color palettes only have 64 colors — from 0 to 63.
-// Passing a number greater than 63 will cause it to wrap around.
-//
-// (So, for example, asking for color ‘66’ would give you color ‘2’.)
+// These color palettes only have 256 colors — from 0 to 255.
 func (receiver Type) Color(index uint8) (color c80color.Type) {
 	if nil == receiver {
 		return nil
