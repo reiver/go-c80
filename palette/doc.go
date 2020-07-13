@@ -1,7 +1,7 @@
 /*
 Package c80palette provides a type for dealing with (color) palettes.
 
-These types of (color) palettes have 64 colors in the palette.
+These types of (color) palettes have 256 colors in the palette.
 
 Usage
 
@@ -39,9 +39,9 @@ If you wanted to list out all the colors in a palette, you could do that with si
 	
 	// ...
 	
-	for index:=uint8(0); index<c80palette.Size; index++ {
+	for index:=0; index<c80palette.Size; index++ {
 		
-		color := machine.Palette().Color(index)
+		color := machine.Palette().Color(uint8(index))
 		
 		fmt.Printf("Color №%d is %s", index, color)
 	}
@@ -64,5 +64,6 @@ If you wanted to list out all the colors in a palette, you could do that with si
 	// Color №13 is rgba(255,0,255,255)
 	// Color №14 is rgba(0,255,255,255)
 	// Color №15 is rgba(255,255,255,255)
+	...
 */
 package c80palette

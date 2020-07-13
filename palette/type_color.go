@@ -21,8 +21,6 @@ func (receiver Type) Color(index uint8) (color c80color.Type) {
 		}
 	}()
 
-	index = index % Size
-
 	beginning := int(index) * c80color.Len
 	ending := beginning + c80color.Len
 

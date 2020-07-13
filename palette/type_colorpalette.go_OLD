@@ -1,0 +1,9 @@
+package c80palette
+
+import (
+	"image/color"
+)
+
+func (receiver Type) ColorPalette() color.Palette {
+	return color.Palette(receiver.colors[:])
+}

@@ -22,8 +22,8 @@ func TestTypeColorModel(t *testing.T) {
 
 	colorModel := palette.ColorModel()
 
-	for index:=uint8(0); index<c80palette.Size; index++ {
-		color := palette.Color(index)
+	for index:=0; index<c80palette.Size; index++ {
+		color := palette.Color(uint8(index))
 
 		er, eg, eb, ea := color.RGBA()
 

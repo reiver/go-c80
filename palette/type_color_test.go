@@ -67,13 +67,13 @@ func TestTypeColor(t *testing.T) {
 
 		var palette c80palette.Type = c80palette.Type(test.Palette[:])
 
-		for index:=uint8(0); index<c80palette.Size; index++ {
+		for index:=0; index<c80palette.Size; index++ {
 			var expected [c80color.Len]uint8
-			for i:=uint8(0); i<c80color.Len; i++ {
+			for i:=0; i<c80color.Len; i++ {
 				expected[i] = test.Palette[index*c80color.Len + i]
 			}
 
-			actual := palette.Color(index)
+			actual := palette.Color(uint8(index))
 
 			if c80color.Array(expected).String() != actual.String() {
 				t.Errorf("For test #%d, the actual color is not what was expected.", testNumber)
