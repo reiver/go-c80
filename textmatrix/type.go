@@ -3,6 +3,7 @@ package c80textmatrix
 import (
 	"reflect"
 	"strings"
+	"unicode/utf8"
 	"unsafe"
 )
 
@@ -66,6 +67,45 @@ func (receiver Type) Poke(runes ...rune) {
 	}
 
 	copy(rs, runes)
+}
+
+func (receiver Type) Publish(s string) {
+	if nil == receiver {
+		return
+	}
+
+	runes := receiver.Runes()
+	if nil == runes {
+		return
+	}
+
+	if "" == s {
+		receiver.LineFeed()
+		return
+	}
+
+	p := s
+
+	Loop: for 0 < len(p) {
+		receiver.LineFeed()
+
+		y := Height-1
+		for x:=0; x<Width; x++ {
+			offset := receiver.runesOffset(x,y)
+
+			r, size := utf8.DecodeRuneInString(p)
+			p = p[size:]
+			if utf8.RuneError == r  && 0 < size {
+				continue
+			}
+			if utf8.RuneError == r {
+				break Loop
+			}
+
+			runes[offset] = r
+		}
+
+	}
 }
 
 func (receiver Type) Runes() []rune {
