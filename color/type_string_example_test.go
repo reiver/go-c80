@@ -9,20 +9,24 @@ import (
 func ExampleType_String() {
 
 	// This memory will be used to store 16 colors.
-	var memory [16*c80color.Len]uint8
+	var memory [16*c80color.ByteSize]uint8
 
 	// The colors stored in ‘memory’ are indexed from 0 to 15.
 	//
 	// Here we are getting the 5th color location in ‘memory’.
 	var colorStorage []uint8
 	{
-		beginning := 5*c80color.Len
-		ending    := beginning + c80color.Len
+		beginning := 5*c80color.ByteSize
+		ending    := beginning + c80color.ByteSize
 
 		colorStorage = memory[beginning:ending]
 	}
 
-	var color c80color.Type = c80color.Type(colorStorage[:])
+	color, err := c80color.Wrap(colorStorage[:])
+	if nil != err {
+		fmt.Printf("could not wrap color: %s", err)
+		return
+	}
 
 	const red   = 44
 	const green = 181

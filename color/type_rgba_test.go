@@ -9,14 +9,14 @@ import (
 func TestTypeRGBA(t *testing.T) {
 
 	tests := []struct{
-		Color c80color.Array
+		Color [4]uint8
 		ExpectedRed   uint32
 		ExpectedGreen uint32
 		ExpectedBlue  uint32
 		ExpectedAlpha uint32
 	}{
 		{
-			Color: c80color.Array{0,0,0, 255},
+			Color: [4]uint8{0,0,0, 255},
 			ExpectedRed:   0x0000,
 			ExpectedGreen: 0x0000,
 			ExpectedBlue:  0x0000,
@@ -26,42 +26,42 @@ func TestTypeRGBA(t *testing.T) {
 
 
 		{
-			Color: c80color.Array{0,0,255, 255},
+			Color: [4]uint8{0,0,255, 255},
 			ExpectedRed:   0x0000,
 			ExpectedGreen: 0x0000,
 			ExpectedBlue:  0xffff,
 			ExpectedAlpha: 0xffff,
 		},
 		{
-			Color: c80color.Array{0,255,0, 255},
+			Color: [4]uint8{0,255,0, 255},
 			ExpectedRed:   0x0000,
 			ExpectedGreen: 0xffff,
 			ExpectedBlue:  0x0000,
 			ExpectedAlpha: 0xffff,
 		},
 		{
-			Color: c80color.Array{0,255,255, 255},
+			Color: [4]uint8{0,255,255, 255},
 			ExpectedRed:   0x0000,
 			ExpectedGreen: 0xffff,
 			ExpectedBlue:  0xffff,
 			ExpectedAlpha: 0xffff,
 		},
 		{
-			Color: c80color.Array{255,0,0, 255},
+			Color: [4]uint8{255,0,0, 255},
 			ExpectedRed:   0xffff,
 			ExpectedGreen: 0x0000,
 			ExpectedBlue:  0x0000,
 			ExpectedAlpha: 0xffff,
 		},
 		{
-			Color: c80color.Array{255,0,255, 255},
+			Color: [4]uint8{255,0,255, 255},
 			ExpectedRed:   0xffff,
 			ExpectedGreen: 0x0000,
 			ExpectedBlue:  0xffff,
 			ExpectedAlpha: 0xffff,
 		},
 		{
-			Color: c80color.Array{255,255,0, 255},
+			Color: [4]uint8{255,255,0, 255},
 			ExpectedRed:   0xffff,
 			ExpectedGreen: 0xffff,
 			ExpectedBlue:  0x0000,
@@ -71,7 +71,7 @@ func TestTypeRGBA(t *testing.T) {
 
 
 		{
-			Color: c80color.Array{255,255,255, 255},
+			Color: [4]uint8{255,255,255, 255},
 			ExpectedRed:   0xffff,
 			ExpectedGreen: 0xffff,
 			ExpectedBlue:  0xffff,
@@ -81,7 +81,14 @@ func TestTypeRGBA(t *testing.T) {
 
 	for testNumber, test := range tests {
 
-		actualRed, actualGreen, actualBlue, actualAlpha := c80color.Type(test.Color[:]).RGBA()
+		color, err := c80color.Wrap(test.Color[:])
+		if nil != err {
+			t.Errorf("For test #%d, received an error, but did not actually expect one.", testNumber)
+			t.Logf("ERROR: (%T) %q", err, err)
+			continue
+		}
+
+		actualRed, actualGreen, actualBlue, actualAlpha := color.RGBA()
 
 		if expected, actual := test.ExpectedRed, actualRed; expected != actual {
 			t.Errorf("For test #%d, the actual Red is not what was expected.", testNumber)

@@ -8,7 +8,9 @@ import (
 // String makes c80color.Type fit the fmt.Stringer interface.
 // And thus make it work with the fmt.Print() family of functions.
 func (receiver Type) String() string {
-	if nil == receiver {
+	p := receiver.bytes
+
+	if nil == p {
 		return "rgba(0x0,0x0,0x0,0x0)"
 	}
 
@@ -16,7 +18,7 @@ func (receiver Type) String() string {
 	{
 		buffer.WriteString("rgba(")
 
-		for i,datum := range receiver {
+		for i,datum := range p {
 			if 0 != i {
 				buffer.WriteRune(',')
 			}
