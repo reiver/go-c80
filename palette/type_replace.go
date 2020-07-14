@@ -1,6 +1,6 @@
 package c80palette
 
-func (receiver Type) Poke(p ...uint8) {
+func (receiver Type) Replace(p ...uint8) {
 	if nil == receiver {
 		return
 	}
@@ -12,5 +12,10 @@ func (receiver Type) Poke(p ...uint8) {
 		return
 	}
 
+	for offset:=0; offset<len(receiver); offset++ {
+		receiver[offset] = 0;
+	}
+
 	copy(receiver[0:Len], p)
+
 }
