@@ -2,11 +2,11 @@ package c80color
 
 func Wrap(p []uint8) (Type, error) {
 	if nil == p {
-		return Type{}, errNil
+		return Nothing(), errNil
 	}
 
 	if ByteSize != len(p) {
-		return Type{}, errBadLength
+		return Nothing(), errBadLength
 	}
 
 	return Type{p}, nil
