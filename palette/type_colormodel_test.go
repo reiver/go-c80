@@ -13,12 +13,20 @@ import (
 func TestTypeColorModel(t *testing.T) {
 	randomness := rand.New(rand.NewSource( time.Now().UTC().UnixNano() ))
 
-	var buffer [c80palette.Size*c80color.Len]uint8
+	var buffer [c80palette.Size*c80color.ByteSize]uint8
 	for i:=0; i<len(buffer); i++ {
 		buffer[i] = uint8(randomness.Intn(256))
 	}
 
-	var palette c80palette.Type = c80palette.Type(buffer[:])
+	var palette c80palette.Type
+	var err error
+
+	palette, err = c80palette.Wrap(buffer[:])
+	if nil != err {
+		t.Errorf("Received an error, but not actually expect one.")
+		t.Logf("ERROR: (%T) %q", err, err)
+		return
+	}
 
 	colorModel := palette.ColorModel()
 

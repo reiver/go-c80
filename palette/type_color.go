@@ -8,30 +8,43 @@ import (
 //
 // These color palettes only have 256 colors — from 0 to 255.
 func (receiver Type) Color(index uint8) (color c80color.Type) {
-	if nil == receiver {
-		return nil
+	p := receiver.bytes
+
+	if nil == p {
+		return c80color.Nothing()
 	}
 
 	defer func() {
 		if r := recover(); nil != r {
-			color = nil
+			color = c80color.Nothing()
 		}
 	}()
 
-	beginning := int(index) * c80color.Len
-	ending := beginning + c80color.Len
+	beginning := int(index) * c80color.ByteSize
+	ending := beginning     + c80color.ByteSize
 
 	{
-		length := len(receiver)
+		length := len(p)
 
 		if length <= int(beginning) {
-			return nil
+			return c80color.Nothing()
 		}
 
 		if length < int(ending) {
-			return nil
+			return c80color.Nothing()
 		}
 	}
 
-	return c80color.Type(receiver[beginning:ending])
+	colorSlice := p[beginning:ending]
+
+	{
+		var err error
+
+		color, err = c80color.Wrap(colorSlice)
+		if nil != err {
+			return c80color.Nothing()
+		}
+	}
+
+	return color
 }

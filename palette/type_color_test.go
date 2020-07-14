@@ -7,16 +7,16 @@ import (
 	"testing"
 )
 
-func TestTypeColor(t *testing.T) {
+func TestType_Color(t *testing.T) {
 
 	tests := []struct{
-		Palette [c80palette.Len]uint8
+		Palette [c80palette.ByteSize]uint8
 	}{
 		{
 			// Nothing here.
 		},
 		{
-			Palette: [c80palette.Len]uint8{
+			Palette: [c80palette.ByteSize]uint8{
 				 0, 1, 2, 3,
 				 4, 5, 6, 7,
 				 8, 9,10,11,
@@ -39,7 +39,7 @@ func TestTypeColor(t *testing.T) {
 			},
 		},
 		{
-			Palette: [c80palette.Len]uint8{
+			Palette: [c80palette.ByteSize]uint8{
 				  1,  1,  1,255,
 				222, 56, 43,255,
 				 57,181, 74,255,
@@ -65,18 +65,32 @@ func TestTypeColor(t *testing.T) {
 
 	for testNumber, test := range tests {
 
-		var palette c80palette.Type = c80palette.Type(test.Palette[:])
+		var palette c80palette.Type
+		var err error
+
+		palette, err = c80palette.Wrap(test.Palette[:])
+		if nil != err {
+			t.Errorf("For test #%d, received an error, but did not actually expect one.", testNumber)
+			t.Logf("ERROR: (%T) %q", err, err)
+			continue
+		}
 
 		for index:=0; index<c80palette.Size; index++ {
-			var expected [c80color.Len]uint8
-			for i:=0; i<c80color.Len; i++ {
-				expected[i] = test.Palette[index*c80color.Len + i]
+			var expectedBuffer [c80color.ByteSize]uint8
+			for i:=0; i<c80color.ByteSize; i++ {
+				expectedBuffer[i] = test.Palette[index*c80color.ByteSize + i]
+			}
+			expected, err := c80color.Wrap(expectedBuffer[:])
+			if nil != err {
+				t.Errorf("For test #%d & index %d, received an error, but did not actually expect one.", testNumber, index)
+				t.Logf("ERROR: (%T) %q", err, err)
+				continue
 			}
 
 			actual := palette.Color(uint8(index))
 
-			if c80color.Array(expected).String() != actual.String() {
-				t.Errorf("For test #%d, the actual color is not what was expected.", testNumber)
+			if expected.String() != actual.String() {
+				t.Errorf("For test #%d & index %d, the actual color is not what was expected.", testNumber, index)
 				t.Logf("EXPECTED: %d", expected)
 				t.Logf("ACTUAL:   %d", actual)
 				continue

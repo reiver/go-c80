@@ -10,9 +10,16 @@ func ExampleType_Color() {
 
 	// This memory will be used for the palette.
 	// This palette will store 256 colors.
-	var memory [c80palette.Len]uint8
+	var memory [c80palette.ByteSize]uint8
 
-	var palette c80palette.Type = c80palette.Type(memory[:])
+	var palette c80palette.Type
+	var err error
+
+	palette, err = c80palette.Wrap(memory[:])
+	if nil != err {
+		fmt.Printf("ERROR: could not wrap memory: %s", err)
+		return
+	}
 
 	// We set the RGBA values for some of the colors in the palette.
 	//

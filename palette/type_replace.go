@@ -1,9 +1,7 @@
 package c80palette
 
-func (receiver Type) Replace(p ...uint8) {
-	if nil == receiver {
-		return
-	}
+func (receiver Type) Replace(c ...uint8) {
+	p := receiver.bytes
 
 	if nil == p {
 		return
@@ -12,10 +10,13 @@ func (receiver Type) Replace(p ...uint8) {
 		return
 	}
 
-	for offset:=0; offset<len(receiver); offset++ {
-		receiver[offset] = 0;
+	for offset:=0; offset<len(p); offset++ {
+		p[offset] = 0;
 	}
 
-	copy(receiver[0:Len], p)
+	if 0 >= len(c) {
+		return
+	}
 
+	copy(p[0:ByteSize], c)
 }
