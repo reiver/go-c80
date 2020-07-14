@@ -8,7 +8,7 @@ func (receiver Type) Poke(red uint8, green uint8, blue uint8, alpha uint8) {
 		return
 	}
 
-	if 4 != len(p) {
+	if ByteSize != len(p) {
 		return
 	}
 

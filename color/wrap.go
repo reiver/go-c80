@@ -5,7 +5,7 @@ func Wrap(p []uint8) (Type, error) {
 		return Type{}, errNil
 	}
 
-	if 4 != len(p) {
+	if ByteSize != len(p) {
 		return Type{}, errBadLength
 	}
 

@@ -11,7 +11,7 @@ func (receiver Type) RGBA() (r, g, b, a uint32) {
 		return 0,0,0,0
 	}
 
-	if 4 != len(p) {
+	if ByteSize != len(p) {
 		return 0,0,0,0
 	}
 
