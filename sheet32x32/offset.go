@@ -5,5 +5,5 @@ import (
 )
 
 func offset(n uint8) int {
-	return int(n) * c80sprite32x32.Len
+	return int(n) * c80sprite32x32.ByteSize
 }
