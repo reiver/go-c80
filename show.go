@@ -43,5 +43,5 @@ func Show() {
 // ShowTo is similar to Show, except it lets you choose where you want to output the
 // "IMAGE:base64-encoded-png" string (using ‘w’).
 func ShowTo(w io.Writer) {
-	fmt.Fprint(w, machine.Raster(0))
+	fmt.Fprint(w, machine)
 }
