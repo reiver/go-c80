@@ -8,7 +8,7 @@ import (
 
 func TestType_Runes(t *testing.T) {
 
-	var buffer [c80textmatrix.Len]byte
+	var buffer [c80textmatrix.ByteSize]byte
 
 	var textmatrix c80textmatrix.Type = c80textmatrix.Type(buffer[:])
 

@@ -463,7 +463,7 @@ func TestType_Pulish(t *testing.T) {
 
 	for testNumber, test := range tests {
 
-		var buffer [c80textmatrix.Len]byte
+		var buffer [c80textmatrix.ByteSize]byte
 
 		var textmatrix c80textmatrix.Type = c80textmatrix.Type(buffer[:])
 
@@ -494,7 +494,7 @@ func TestType_Pulish(t *testing.T) {
 			t.Logf("For test #%d...", testNumber)
 			t.Logf("ACTUAL:\n%s", textmatrix.String())
 
-			var expectedBuffer [c80textmatrix.Len]byte
+			var expectedBuffer [c80textmatrix.ByteSize]byte
 			var expectedTextMatrix c80textmatrix.Type = c80textmatrix.Type(expectedBuffer[:])
 			expectedTextMatrix.Poke(test.Expected[:]...)
 
