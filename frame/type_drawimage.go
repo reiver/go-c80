@@ -2,9 +2,10 @@ package c80frame
 
 import (
 	"image"
+	"image/draw"
 )
 
-func (receiver *Type) Image() image.Image {
+func (receiver *Type) DrawImage() draw.Image {
 	if nil == receiver {
 		return nil
 	}

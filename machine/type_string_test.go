@@ -27,7 +27,7 @@ func TestType_String(t *testing.T) {
 				const index = 2
 
 				machine.Palette().Color(index).Poke(0,0,0,255)
-				machine.Raster0().Dye(index)
+				machine.Raster().Dye(index)
 
 				return &machine
 			}(),
@@ -40,7 +40,7 @@ func TestType_String(t *testing.T) {
 				const index = 1
 
 				machine.Palette().Color(index).Poke(255,199,6,255)
-				machine.Raster0().Dye(index)
+				machine.Raster().Dye(index)
 
 				return &machine
 			}(),
@@ -53,7 +53,7 @@ func TestType_String(t *testing.T) {
 				const index = 11
 
 				machine.Palette().Color(index).Poke(0,111,184,255)
-				machine.Raster0().Dye(index)
+				machine.Raster().Dye(index)
 
 				return &machine
 			}(),
