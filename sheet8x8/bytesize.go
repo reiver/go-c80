@@ -4,4 +4,4 @@ import (
 	"github.com/reiver/go-c80/sprite8x8"
 )
 
-const Len = 256 * c80sprite8x8.Len
+const ByteSize = 256 * c80sprite8x8.ByteSize

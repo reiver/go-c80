@@ -1,3 +1,5 @@
 package c80sheet8x8
 
-type Type []uint8
+type Type struct {
+	bytes []uint8
+}
