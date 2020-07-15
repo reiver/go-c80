@@ -1,7 +1,6 @@
 package c80machine_test
 
 import (
-	"github.com/reiver/go-c80/color"
 	"github.com/reiver/go-c80/machine"
 	"github.com/reiver/go-c80/palette"
 	"github.com/reiver/go-c80/raster"
@@ -18,8 +17,8 @@ func TestTypeAt(t *testing.T) {
 
 	var machine c80machine.Type
 
-	for index:=uint8(0); index<c80palette.Size; index++ {
-		machine.Palette().Color(index).Poke(
+	for index:=0; index<c80palette.Size; index++ {
+		machine.Palette().Color(uint8(index)).Poke(
 			uint8(randomness.Intn(256)),
 			uint8(randomness.Intn(256)),
 			uint8(randomness.Intn(256)),
@@ -27,9 +26,10 @@ func TestTypeAt(t *testing.T) {
 		)
 	}
 
-	for index:=uint8(0); index<c80palette.Size; index++ {
-		actual := machine.Palette().Color(index).Peek()
-		notExpected := c80color.Array{}
+	for index:=0; index<c80palette.Size; index++ {
+		actualR, actualG, actualB, actualA := machine.Palette().Color(uint8(index)).Peek()
+		var actual [4]uint8 = [4]uint8{actualR, actualG, actualB, actualA}
+		notExpected := [4]uint8{}
 
 		if notExpected == actual {
 			t.Errorf("Was not able to set color №%d in palette.", index)

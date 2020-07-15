@@ -1,8 +1,6 @@
 package c80machine
 
 import (
-	"github.com/reiver/go-c80/color"
-
 	"image/color"
 )
 
@@ -13,12 +11,12 @@ import (
 func (receiver Type) At(x int, y int) color.Color {
 
 	raster := receiver.Raster0()
-	if nil == raster {
-		return c80color.Array{0,0,0,0}
+	if raster.IsNothing() {
+		return color.NRGBA{0,0,0,0}
 	}
 
 	if !raster.InBounds(x,y) {
-		return c80color.Array{0,0,0,0}
+		return color.NRGBA{0,0,0,0}
 	}
 
 	paletteIndex := raster.ColorIndexAt(x,y)
