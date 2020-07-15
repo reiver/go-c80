@@ -10,4 +10,6 @@ package c80sprite8x8
 //	 4  5  6  7
 //	 8  9 10 11
 //	12 13 14 15
-type Type []uint8
+type Type struct {
+	bytes []uint8
+}

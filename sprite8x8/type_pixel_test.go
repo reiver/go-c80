@@ -13,11 +13,19 @@ func TestType_Pixel(t *testing.T) {
 
 	randomness := rand.New(rand.NewSource( time.Now().UTC().UnixNano() ))
 
-	var array  c80sprite8x8.Array
-	var sprite c80sprite8x8.Type = c80sprite8x8.Type(array[:])
+	var buffer [64]uint8
+	var sprite c80sprite8x8.Type
+	var err error
 
-	for i:=0; i<len(sprite); i++ {
-		sprite[i] = uint8(randomness.Intn(16))
+	sprite, err = c80sprite8x8.Wrap(buffer[:])
+	if nil != err {
+		t.Errorf("Received an error, but did not actually expect one.")
+		t.Logf("ERROR: (%T) %q", err, err)
+		return
+	}
+
+	for i:=0; i<len(buffer); i++ {
+		buffer[i] = uint8(randomness.Intn(16))
 	}
 
 	{

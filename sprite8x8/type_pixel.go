@@ -5,15 +5,30 @@ import (
 )
 
 func (receiver Type) Pixel(x int, y int) c80pixel.Type {
-	if nil == receiver {
-		return nil
+	p := receiver.bytes
+
+	if nil == p {
+		return c80pixel.Nothing()
+	}
+	if 0 >= len(p) {
+		return c80pixel.Nothing()
+	}
+	if ByteSize != len(p) {
+		return c80pixel.Nothing()
 	}
 
-	offset := Offset(x,y)
+	offset := offset(x,y)
 
-	if len(receiver) <= offset {
-		return nil
+	if len(p) <= offset {
+		return c80pixel.Nothing()
 	}
 
-	return c80pixel.Type(receiver[offset:offset+c80pixel.Len])
+	pixelMemory := p[offset:offset+c80pixel.ByteSize]
+
+	pixel, err := c80pixel.Wrap(pixelMemory)
+	if nil != err {
+		return c80pixel.Nothing()
+	}
+
+	return pixel
 }
