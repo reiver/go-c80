@@ -467,7 +467,15 @@ func TestType_LineFeed(t *testing.T) {
 
 		var buffer [c80textmatrix.ByteSize]byte
 
-		var textmatrix c80textmatrix.Type = c80textmatrix.Type(buffer[:])
+		var textmatrix c80textmatrix.Type
+		var err error
+
+		textmatrix, err = c80textmatrix.Wrap(buffer[:])
+		if nil != err {
+			t.Errorf("For test #%d, received an error, but did not actually expect one.", testNumber)
+			t.Logf("ERROR: (%T) %q", err, err)
+			continue
+		}
 
 		textmatrix.Poke(test.Original[:]...)
 
@@ -499,7 +507,13 @@ func TestType_LineFeed(t *testing.T) {
 			t.Logf("ACTUAL:\n%s", textmatrix.String())
 
 			var expectedBuffer [c80textmatrix.ByteSize]byte
-			var expectedTextMatrix c80textmatrix.Type = c80textmatrix.Type(expectedBuffer[:])
+			var expectedTextMatrix c80textmatrix.Type
+			expectedTextMatrix, err  = c80textmatrix.Wrap(expectedBuffer[:])
+			if nil != err {
+				t.Errorf("For test #%d, received an error, but did not actually expect one.", testNumber)
+				t.Logf("ERROR: (%T) %q", err, err)
+				continue
+			}
 			expectedTextMatrix.Poke(test.Expected[:]...)
 
 			t.Logf("EXPECTED:\n%s", expectedTextMatrix.String())

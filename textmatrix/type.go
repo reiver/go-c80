@@ -8,13 +8,11 @@ import (
 )
 
 // Type represents a text matrix.
-type Type []uint8
+type Type struct {
+	bytes []uint8
+}
 
 func (receiver Type) Clear() {
-	if nil == receiver {
-		return
-	}
-
 	runes := receiver.Runes()
 	if nil == runes {
 		return
@@ -26,10 +24,6 @@ func (receiver Type) Clear() {
 }
 
 func (receiver Type) LineFeed() {
-	if nil == receiver {
-		return
-	}
-
 	runes := receiver.Runes()
 	if nil == runes {
 		return
@@ -57,10 +51,6 @@ func (receiver Type) LineFeed() {
 }
 
 func (receiver Type) Poke(runes ...rune) {
-	if nil == receiver {
-		return
-	}
-
 	rs := receiver.Runes()
 	if nil == rs {
 		return
@@ -70,10 +60,6 @@ func (receiver Type) Poke(runes ...rune) {
 }
 
 func (receiver Type) Publish(s string) {
-	if nil == receiver {
-		return
-	}
-
 	runes := receiver.Runes()
 	if nil == runes {
 		return
@@ -109,11 +95,18 @@ func (receiver Type) Publish(s string) {
 }
 
 func (receiver Type) Runes() []rune {
-	if nil == receiver {
+	p := receiver.bytes
+	if nil == p {
+		return nil
+	}
+	if 0 >= len(p) {
+		return nil
+	}
+	if ByteSize != len(p) {
 		return nil
 	}
 
-	h := (*reflect.SliceHeader)(unsafe.Pointer(&receiver))
+	h := (*reflect.SliceHeader)(unsafe.Pointer(&p))
 
 	var header reflect.SliceHeader
 	header.Data = h.Data

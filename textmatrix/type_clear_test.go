@@ -10,7 +10,15 @@ func TestType_Clear(t *testing.T) {
 
 	var buffer [c80textmatrix.ByteSize]byte
 
-	var textmatrix c80textmatrix.Type = c80textmatrix.Type(buffer[:])
+	var textmatrix c80textmatrix.Type
+	var err error
+
+	textmatrix, err = c80textmatrix.Wrap(buffer[:])
+	if nil != err {
+		t.Errorf("Received an error, but did not actually expect one.")
+		t.Logf("ERROR: (%T) %q", err, err)
+		return
+	}
 
 	textmatrix.Clear()
 
