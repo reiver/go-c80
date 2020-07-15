@@ -2,7 +2,15 @@ package c80raster
 
 // SetColorIndex sets the color at (x,y) to the index in the palette.
 func (receiver Type) SetColorIndex(x int, y int, index uint8) {
-	if nil == receiver {
+	p := receiver.bytes
+
+	if nil == p {
+		return
+	}
+	if 0 >= len(p) {
+		return
+	}
+	if ByteSize != len(p) {
 		return
 	}
 
@@ -12,5 +20,5 @@ func (receiver Type) SetColorIndex(x int, y int, index uint8) {
 
 	offset := receiver.PixOffset(x,y)
 
-	receiver[offset] = index
+	p[offset] = index
 }

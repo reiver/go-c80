@@ -1,4 +1,6 @@
 package c80raster
 
 // Type represents a raster.
-type Type []uint8
+type Type struct {
+	bytes []uint8
+}

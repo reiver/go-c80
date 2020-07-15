@@ -3,15 +3,21 @@ package c80raster
 // Dye changes the color of the entire raster image
 // to the color represented by the (color) palette index.
 func (receiver Type) Dye(index uint8) {
-	if nil == receiver {
+	p := receiver.bytes
+
+	if nil == p {
+		return
+	}
+	if 0 >= len(p) {
+		return
+	}
+	if ByteSize != len(p) {
 		return
 	}
 
-	index = index & 0x0f
-
-	limit := len(receiver)
+	limit := len(p)
 
 	for i:=0; i<limit; i++ {
-		receiver[i] = index
+		p[i] = index
 	}
 }

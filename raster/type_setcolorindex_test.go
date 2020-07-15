@@ -14,7 +14,15 @@ func TestTypeSetColorIndex(t *testing.T) {
 	randomness := rand.New(rand.NewSource( time.Now().UTC().UnixNano() ))
 
 	var buffer [c80raster.Width*c80raster.Height]uint8
-	var raster c80raster.Type = c80raster.Type(buffer[:])
+	var raster c80raster.Type
+	var err error
+
+	raster, err = c80raster.Wrap(buffer[:])
+	if nil != err {
+		t.Errorf("Received an error, but did not actually expect one.")
+		t.Logf("ERROR: (%T) %q", err, err)
+		return
+	}
 
 	for y := 0; y<192; y++ {
 		for x := 0; x<128; x++  {
