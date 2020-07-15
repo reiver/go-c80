@@ -19,8 +19,8 @@ func (receiver *Type) DrawImage() draw.Image {
 				Y:0,
 			},
 			Max: image.Point{
-				X:(Width-1),
-				Y:(Height-1),
+				X:Width,
+				Y:Height,
 			},
 		},
 	}
