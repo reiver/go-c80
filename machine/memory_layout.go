@@ -12,10 +12,7 @@ const (
 	PTR_PALETTE      = 0
 	LEN_PALETTE      = c80palette.ByteSize
 
-	PTR_FONTS        = PTR_PALETTE      + LEN_PALETTE
-	LEN_FONTS        = c80sheet8x8.ByteSize
-
-	PTR_TILES        = PTR_FONTS        + LEN_FONTS
+	PTR_TILES        = PTR_PALETTE      + LEN_PALETTE
 	LEN_TILES        = c80sheet8x8.ByteSize
 
 	PTR_SPRITES8x8   = PTR_TILES        + LEN_TILES
@@ -36,7 +33,6 @@ const (
 
 const Len =
 	LEN_PALETTE      +
-	LEN_FONTS        +
 	LEN_TILES        +
 	LEN_SPRITES8x8   +
 	LEN_SPRITES32x32 +

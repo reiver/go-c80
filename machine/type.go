@@ -28,21 +28,6 @@ func (receiver *Type) Palette() c80palette.Type {
 	return x
 }
 
-// Fonts provides access to the machine's sprite sheet for 8x8 pixel sprite fonts.
-func (receiver *Type) Fonts() c80sheet8x8.Type {
-	beginning := PTR_FONTS
-	ending    := beginning + LEN_FONTS
-
-	p := receiver.memory[beginning:ending]
-
-	x, err := c80sheet8x8.Wrap(p)
-	if nil != err {
-		return c80sheet8x8.Nothing()
-	}
-
-	return x
-}
-
 // Tiles provides access to the machine's sprite sheet for 8x8 pixel sprite (background) tiles.
 func (receiver *Type) Tiles() c80sheet8x8.Type {
 	beginning := PTR_TILES
