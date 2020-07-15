@@ -88,10 +88,10 @@ func (receiver *Type) TextMatrix() c80textmatrix.Type {
 	return x
 }
 
-// Raster0 provides access to one of the machine's default raster — raster №0.
-func (receiver *Type) Raster0() c80raster.Type {
-	beginning := PTR_RASTER0
-	ending    := beginning + LEN_RASTER0
+// Raster provides access the machine's default raster.
+func (receiver *Type) Raster() c80raster.Type {
+	beginning := PTR_RASTER
+	ending    := beginning + LEN_RASTER
 
 	p := receiver.memory[beginning:ending]
 
