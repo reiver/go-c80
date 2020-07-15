@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestTypeString(t *testing.T) {
+func TestType_String(t *testing.T) {
 
 	tests := []struct{
 		Machine *c80machine.Type

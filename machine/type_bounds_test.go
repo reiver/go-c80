@@ -8,7 +8,7 @@ import (
 	"testing"
 )
 
-func TestTypeBounds(t *testing.T) {
+func TestType_Bounds(t *testing.T) {
 
 	expected := image.Rectangle{
 		Min: image.Point{X:0     , Y:0       },

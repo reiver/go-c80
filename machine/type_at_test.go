@@ -11,7 +11,7 @@ import (
 	"testing"
 )
 
-func TestTypeAt(t *testing.T) {
+func TestType_At(t *testing.T) {
 
 	randomness := rand.New(rand.NewSource( time.Now().UTC().UnixNano() ))
 
