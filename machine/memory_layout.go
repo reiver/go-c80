@@ -26,9 +26,6 @@ const (
 
 	PTR_RASTER0      = PTR_TEXTMATRIX   + LEN_TEXTMATRIX
 	LEN_RASTER0      = c80raster.ByteSize
-
-	PTR_RASTER1      = PTR_RASTER0      + LEN_RASTER0
-	LEN_RASTER1      = c80raster.ByteSize
 )
 
 const Len =
@@ -37,5 +34,4 @@ const Len =
 	LEN_SPRITES8x8   +
 	LEN_SPRITES32x32 +
 	LEN_TEXTMATRIX   +
-	LEN_RASTER0      +
-	LEN_RASTER1
+	LEN_RASTER0

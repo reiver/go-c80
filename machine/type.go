@@ -102,18 +102,3 @@ func (receiver *Type) Raster0() c80raster.Type {
 
 	return x
 }
-
-// Raster1 provides access to one of the machine's default raster — raster №1.
-func (receiver *Type) Raster1() c80raster.Type {
-	beginning := PTR_RASTER1
-	ending    := beginning + LEN_RASTER1
-
-	p := receiver.memory[beginning:ending]
-
-	x, err := c80raster.Wrap(p)
-	if nil != err {
-		return c80raster.Nothing()
-	}
-
-	return x
-}
