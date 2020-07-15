@@ -12,7 +12,10 @@ const (
 	PTR_PALETTE      = 0
 	LEN_PALETTE      = c80palette.ByteSize
 
-	PTR_TILES        = PTR_PALETTE      + LEN_PALETTE
+	PTR_RASTER       = PTR_PALETTE      + LEN_PALETTE
+	LEN_RASTER       = c80raster.ByteSize
+
+	PTR_TILES        = PTR_RASTER       + LEN_RASTER
 	LEN_TILES        = c80sheet8x8.ByteSize
 
 	PTR_SPRITES8x8   = PTR_TILES        + LEN_TILES
@@ -23,15 +26,12 @@ const (
 
 	PTR_TEXTMATRIX   = PTR_SPRITES32x32 + LEN_SPRITES32x32
 	LEN_TEXTMATRIX   = c80textmatrix.ByteSize
-
-	PTR_RASTER       = PTR_TEXTMATRIX   + LEN_TEXTMATRIX
-	LEN_RASTER       = c80raster.ByteSize
 )
 
 const Len =
 	LEN_PALETTE      +
+	LEN_RASTER       +
 	LEN_TILES        +
 	LEN_SPRITES8x8   +
 	LEN_SPRITES32x32 +
-	LEN_TEXTMATRIX   +
-	LEN_RASTER
+	LEN_TEXTMATRIX
