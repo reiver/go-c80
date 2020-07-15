@@ -1,3 +1,5 @@
 package c80pixel
 
-type Type []uint8
+type Type struct {
+	bytes []uint8
+}

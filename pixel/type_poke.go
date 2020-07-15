@@ -1,12 +1,17 @@
 package c80pixel
 
 func (receiver Type) Poke(index uint8) {
-	if nil == receiver {
+	p := receiver.bytes
+
+	if nil == p {
 		return
 	}
-	if 0 >= len(receiver) {
-
+	if 0 >= len(p) {
+		return
+	}
+	if ByteSize != len(p) {
+		return
 	}
 
-	receiver[0] = index
+	p[0] = index
 }

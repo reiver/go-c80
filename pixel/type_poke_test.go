@@ -15,11 +15,19 @@ func TestType_Poke(t *testing.T) {
 
 	for testNumber:=0; testNumber<64; testNumber++ {
 
-		var buffer c80pixel.Array = c80pixel.Array{
+		var buffer [1]uint8 = [1]uint8{
 			uint8(randomness.Intn(16)),
 		}
 
-		var pixel  c80pixel.Type = c80pixel.Type(buffer[:])
+		var pixel c80pixel.Type
+		var err error
+
+		pixel, err = c80pixel.Wrap(buffer[:])
+		if nil != err {
+			t.Errorf("For test #%d, ", testNumber)
+			t.Logf("ERROR: (%T) %q", err, err)
+			continue
+		}
 
 		expected := uint8(randomness.Intn(16))
 
