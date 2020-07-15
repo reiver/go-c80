@@ -10,10 +10,10 @@ func (receiver *Type) DrawImage() draw.Image {
 		return nil
 	}
 
-	array := receiver.bytes
+	p := receiver.bytes[:]
 
 	return &image.NRGBA{
-		Pix: array[:],
+		Pix: p,
 		Stride:Width*Depth,
 		Rect: image.Rectangle{
 			Min: image.Point{
