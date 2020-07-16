@@ -1,7 +1,9 @@
 package c80machine
 
 import (
+	"github.com/reiver/go-c80/frame"
 	"github.com/reiver/go-c80/palette"
+	"github.com/reiver/go-c80/palettedraster"
 	"github.com/reiver/go-c80/raster"
 	"github.com/reiver/go-c80/sheet8x8"
 	"github.com/reiver/go-c80/sheet32x32"
@@ -10,7 +12,26 @@ import (
 
 // Type represents a fantasy virtual machine.
 type Type struct {
+	frame c80frame.Type
 	memory [Len]uint8
+}
+
+func (receiver *Type) PalettedRaster() c80palettedraster.Type {
+	if nil == receiver {
+		return c80palettedraster.Nothing()
+	}
+
+	beginning := PTR_PALETTE
+	ending    := beginning + LEN_PALETTE + LEN_RASTER
+
+	p := receiver.memory[beginning:ending]
+
+	x, err := c80palettedraster.Wrap(p)
+	if nil != err {
+		return c80palettedraster.Nothing()
+	}
+
+	return x
 }
 
 // Palette provides access to the machines palette.
