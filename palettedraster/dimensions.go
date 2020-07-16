@@ -1,4 +1,4 @@
-package c80palettedframe
+package c80palettedraster
 
 import (
 	"github.com/reiver/go-c80/raster"

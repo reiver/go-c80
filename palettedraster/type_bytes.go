@@ -1,4 +1,4 @@
-package c80palettedframe
+package c80palettedraster
 
 func (receiver Type) Bytes() []byte {
 	return receiver.bytes

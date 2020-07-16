@@ -1,4 +1,4 @@
-package c80palettedframe
+package c80palettedraster
 
 func Wrap(p []uint8) (Type, error) {
 	if nil == p {

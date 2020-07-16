@@ -1,9 +1,9 @@
-package c80palettedframe_test
+package c80palettedraster_test
 
 import (
 	"github.com/reiver/go-font8x8"
 
-	"github.com/reiver/go-c80/palettedframe"
+	"github.com/reiver/go-c80/palettedraster"
 
 	"image"
 	"image/color"
@@ -14,12 +14,12 @@ import (
 
 func TestType_DrawableImage(t *testing.T) {
 
-	var buffer [c80palettedframe.ByteSize]uint8
-	var palettedframe c80palettedframe.Type
+	var buffer [c80palettedraster.ByteSize]uint8
+	var palettedraster c80palettedraster.Type
 	{
 		var err error
 
-		palettedframe, err = c80palettedframe.Wrap(buffer[:])
+		palettedraster, err = c80palettedraster.Wrap(buffer[:])
 		if nil != err {
 			t.Errorf("Received an error, but did not actually expect one.")
 			t.Logf("ERROR: (%T) %q", err, err)
@@ -29,14 +29,14 @@ func TestType_DrawableImage(t *testing.T) {
 
 	var bytes []byte
 	{
-		bytes = palettedframe.Bytes()
+		bytes = palettedraster.Bytes()
 
 		if length := len(bytes); 0 >= length {
 			t.Errorf("The actual number of bytes is less than expected.")
 			t.Logf("LENGTH: %d", length)
 			return
 		}
-		if expected, actual := c80palettedframe.ByteSize, len(bytes); expected != actual {
+		if expected, actual := c80palettedraster.ByteSize, len(bytes); expected != actual {
 			t.Errorf("The actual number of bytes is not what was expected.")
 			t.Logf("EXPECTED: %d", expected)
 			t.Logf("ACTUAL:   %d", actual)
@@ -56,7 +56,7 @@ func TestType_DrawableImage(t *testing.T) {
 
 	// Set the palette.
 	{
-		palette := palettedframe.Palette()
+		palette := palettedraster.Palette()
 
 		palette.Color(0).Poke(0x00,0x00,0x00, 0xff) // black
 		palette.Color(1).Poke(0x00,0x00,0xff, 0xff) // blue
@@ -83,7 +83,7 @@ func TestType_DrawableImage(t *testing.T) {
 
 	// Set every pixel to the 1st background color.
 	{
-		drawable := palettedframe.DrawableImage()
+		drawable := palettedraster.DrawableImage()
 
 		c := color.NRGBA{
 			R:bg1.Red,
@@ -92,8 +92,8 @@ func TestType_DrawableImage(t *testing.T) {
 			A:bg1.Alpha,
 		}
 
-		for y:=0; y<c80palettedframe.Height; y++ {
-			for x:=0; x<c80palettedframe.Width; x++ {
+		for y:=0; y<c80palettedraster.Height; y++ {
+			for x:=0; x<c80palettedraster.Width; x++ {
 				drawable.Set(x,y, c)
 			}
 		}
@@ -101,10 +101,10 @@ func TestType_DrawableImage(t *testing.T) {
 
 	// Check to see what is there AFTER the 1st time we draw anything is what we expect.
 	{
-		image := palettedframe.DrawableImage()
+		image := palettedraster.DrawableImage()
 
-		for y:=0; y<c80palettedframe.Height; y++ {
-			for x:=0; x<c80palettedframe.Width; x++ {
+		for y:=0; y<c80palettedraster.Height; y++ {
+			for x:=0; x<c80palettedraster.Width; x++ {
 				color := image.At(x,y)
 
 				r,g,b,a := color.RGBA()
@@ -118,7 +118,7 @@ func TestType_DrawableImage(t *testing.T) {
 					t.Errorf("For (x,y)=(%d,%d), the actual rgba value for the pixel is not what was expected.", x,y)
 					t.Logf("EXPECTED (r,g,b,a) = (%d,%d,%d,%d)", eR,eG,eB,eA)
 					t.Logf("ACTUAL   (r,g,b,a) = (%d,%d,%d,%d)", r,g,b,a)
-					t.Log(palettedframe.String())
+					t.Log(palettedraster.String())
 					return
 				}
 			}
@@ -145,7 +145,7 @@ func TestType_DrawableImage(t *testing.T) {
 		x := cx*8
 		y := cy*8
 
-		drawableImage := palettedframe.DrawableImage()
+		drawableImage := palettedraster.DrawableImage()
 
 		rect := image.Rectangle{
 			Min: image.Point{
@@ -170,10 +170,10 @@ func TestType_DrawableImage(t *testing.T) {
 
 	// Check to see what is there AFTER the 2nd time we draw anything is what we expect.
 	{
-		drawable := palettedframe.DrawableImage()
+		drawable := palettedraster.DrawableImage()
 
-		for y:=0; y<c80palettedframe.Height; y++ {
-			for x:=0; x<c80palettedframe.Width; x++ {
+		for y:=0; y<c80palettedraster.Height; y++ {
+			for x:=0; x<c80palettedraster.Width; x++ {
 
 				aR, aG, aB, aA := drawable.At(x,y).RGBA()
 
@@ -186,7 +186,7 @@ func TestType_DrawableImage(t *testing.T) {
 					t.Errorf("For (x,y)=(%d,%d), the actual value for the pixel color is not what was expected.", x,y)
 					t.Logf("EXPECTED (r,g,b,a)=(%d,%d,%d,%d)", eR, eG, eB, aA)
 					t.Logf("ACTUAL   (r,g,b,a)=(%d,%d,%d,%d)", aR, aG, aB, aA)
-					t.Log(palettedframe.String())
+					t.Log(palettedraster.String())
 					return
 				}
 			}
@@ -201,7 +201,7 @@ func TestType_DrawableImage(t *testing.T) {
 
 	// Draw the letter "N".
 	{
-		drawable := palettedframe.DrawableImage()
+		drawable := palettedraster.DrawableImage()
 
 		var character rune = 'N'
 
@@ -223,10 +223,10 @@ func TestType_DrawableImage(t *testing.T) {
 
 	// Check to see what is there AFTER the 3nd time we draw anything is what we expect.
 	{
-		drawable := palettedframe.DrawableImage()
+		drawable := palettedraster.DrawableImage()
 
-		for y:=0; y<c80palettedframe.Height; y++ {
-			for x:=0; x<c80palettedframe.Width; x++ {
+		for y:=0; y<c80palettedraster.Height; y++ {
+			for x:=0; x<c80palettedraster.Width; x++ {
 
 				// If we are on the spot where we drew the character.
 				if (printY <= y && y < (printY+fontHeight)) && (printX <= x && x < (printX+fontWidth)) {
@@ -256,7 +256,7 @@ func TestType_DrawableImage(t *testing.T) {
 					t.Errorf("For (x,y)=(%d,%d), the actual value for the pixel color is not what was expected.", x,y)
 					t.Logf("EXPECTED (r,g,b,a)=(%d,%d,%d,%d)", eR, eG, eB, aA)
 					t.Logf("ACTUAL   (r,g,b,a)=(%d,%d,%d,%d)", aR, aG, aB, aA)
-					t.Log(palettedframe.String())
+					t.Log(palettedraster.String())
 					return
 				}
 			}
@@ -266,7 +266,7 @@ func TestType_DrawableImage(t *testing.T) {
 	{
 		expected := "IMAGE:iVBORw0KGgoAAAANSUhEUgAAAQAAAAEgCAMAAABsAF1iAAADAFBMVEUAAAAAAP8A/wAA////AAD/AP//xwb///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB9MpZoAAABAHRSTlP//////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJj4ZeAAAAmtJREFUeJzs1DFqgzEQBtGtsve/cSAEjO3+f8XOVCo/PZDm53gB6AG6APQAXQB6gC4APUAXgB6gC0AP0AWgB+gC0AN0AegBugBex92Z2T1G8gaw5wH2OMD8Gcg5z/fxB5wHuP4EbgPMf3LO8x277ncB6AG6APQAXQB6gC4APUAXgB6gC0AP0AWgB+gC0AN0AegBugD0AF0AeoAuAD1AF4AeoAtAD9AFoAfoAtADdAHoAboA9ABdAHqALgA9QBeAHqALQA/QBaAH6ALQA3QB6AG6APQAXQB6gC4APUAXgB6gC0AP0AWgB+gC0AN0AegBugD0AF0AeoAuAD1AF4AeoAtAD9AFoAfoAtADdAHoAboA9ABdAHqALgA9QBeAHqALQA/QBaAH6ALQA3QB6AG6APQAXQB6gC4APUAXgB6gC0AP0AWgB+gC0AN0AegBugD0AF0AeoAuAD1AF4AeoAtAD9AFoAfoAtADdAHoAboA9ABdAHqALgA9QBeAHqALQA/QBaAH6ALQA3QB6AG6APQAXQB6gC4APUAXgB6gC0AP0AWgB+gC0AN0AegBugD0AF0AeoAuAD1AF4AeoAtAD9AFoAfoAtADdAHoAboA9ABdAHqALgA9QBeAHqALQA/QBaAH6ALQA3QB6AG6APQAXQB6gC4APUAXgB6gC0AP0AWgB+gC0AN0AegBugD0AF0AeoAuAD1AF4AeoAtAD9AFoAfoAtADdAHoAboA9ABdAHqALgA9QBeAHqALQA/QBaAH6ALQA3QB6AG6APQAXQB6gC4APUAXgB6gC0AP0AWgB+gC0AN0AegBuvMAvwEAAP//bhC/yZZzBIIAAAAASUVORK5CYII="
 
-		actual := palettedframe.String()
+		actual := palettedraster.String()
 
 		if expected != actual {
 			t.Errorf("The actual serialized value is not what was expected.")
