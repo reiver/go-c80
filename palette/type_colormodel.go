@@ -7,9 +7,9 @@ import (
 // ColorModel, in a sense, convert Type to a built-in Go color.Model.
 func (receiver Type) ColorModel() color.Model {
 
-	var p [Size]color.Color
+	var p [Len]color.Color
 
-	for index:=0; index<Size; index++ {
+	for index:=0; index<Len; index++ {
 		p[index] = receiver.Color(uint8(index))
 	}
 

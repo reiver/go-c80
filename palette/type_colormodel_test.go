@@ -13,7 +13,7 @@ import (
 func TestTypeColorModel(t *testing.T) {
 	randomness := rand.New(rand.NewSource( time.Now().UTC().UnixNano() ))
 
-	var buffer [c80palette.Size*c80color.ByteSize]uint8
+	var buffer [c80palette.Len*c80color.ByteSize]uint8
 	for i:=0; i<len(buffer); i++ {
 		buffer[i] = uint8(randomness.Intn(256))
 	}
@@ -30,7 +30,7 @@ func TestTypeColorModel(t *testing.T) {
 
 	colorModel := palette.ColorModel()
 
-	for index:=0; index<c80palette.Size; index++ {
+	for index:=0; index<c80palette.Len; index++ {
 		color := palette.Color(uint8(index))
 
 		er, eg, eb, ea := color.RGBA()

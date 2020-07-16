@@ -75,7 +75,7 @@ func TestType_Color(t *testing.T) {
 			continue
 		}
 
-		for index:=0; index<c80palette.Size; index++ {
+		for index:=0; index<c80palette.Len; index++ {
 			var expectedBuffer [c80color.ByteSize]uint8
 			for i:=0; i<c80color.ByteSize; i++ {
 				expectedBuffer[i] = test.Palette[index*c80color.ByteSize + i]
