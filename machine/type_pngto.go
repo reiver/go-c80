@@ -4,16 +4,18 @@ import (
 	"io"
 )
 
-func (receiver *Type) PNGTo(writer io.Writer) {
+func (receiver *Type) PNGTo(writer io.Writer) error {
 	if nil == receiver {
-		return
+		return errNilReceiver
 	}
 
 	if nil == writer {
-		return
+		return errNilWriter
 	}
 
 	if err := receiver.frame.PNGTo(writer); nil != err {
-		return
+		return err
 	}
+
+	return nil
 }
