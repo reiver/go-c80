@@ -5,7 +5,7 @@ import (
 	"image/draw"
 )
 
-func (receiver Type) DrawImage() draw.Image {
+func (receiver Type) DrawableImage() draw.Image {
 	if nil == receiver.bytes {
 		return nil
 	}
