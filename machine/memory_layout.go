@@ -28,7 +28,7 @@ const (
 	LEN_TEXTMATRIX   = c80textmatrix.ByteSize
 )
 
-const Len =
+const memoryByteSize =
 	LEN_PALETTE      +
 	LEN_RASTER       +
 	LEN_TILES        +

@@ -8,13 +8,69 @@ import (
 	"github.com/reiver/go-c80/sheet8x8"
 	"github.com/reiver/go-c80/sheet32x32"
 	"github.com/reiver/go-c80/textmatrix"
+
+	"image"
 )
 
 // Type represents a fantasy virtual machine.
 type Type struct {
 	frame c80frame.Type
-	memory [Len]uint8
+	memory [memoryByteSize]uint8
+
+	tiles        [c80sheet8x8.Len]image.Paletted
+	sprites8x8   [c80sheet8x8.Len]image.Paletted
+	sprites32x32 [c80sheet32x32.Len]image.Paletted
 }
+
+// Init initialized Type. Type needs to be initialized before it is used.
+func (receiver *Type) Init() {
+	if nil == receiver {
+		return
+	}
+
+	{
+		tiles := receiver.Tiles()
+
+		for id:=0; id<len(receiver.tiles); id++ {
+			sprite := tiles.Sprite(uint8(id))
+
+			pix    := sprite.Pix()
+			stride := sprite.Stride()
+
+			receiver.tiles[id].Pix     = pix
+			receiver.tiles[id].Stride  = stride
+		}
+	}
+
+	{
+		sprites8x8 := receiver.Sprites8x8()
+
+		for id:=0; id<len(receiver.sprites8x8); id++ {
+			sprite := sprites8x8.Sprite(uint8(id))
+
+			pix    := sprite.Pix()
+			stride := sprite.Stride()
+
+			receiver.sprites8x8[id].Pix     = pix
+			receiver.sprites8x8[id].Stride  = stride
+		}
+	}
+
+	{
+		sprites32x32 := receiver.Sprites32x32()
+
+		for id:=0; id<len(receiver.sprites32x32); id++ {
+			sprite := sprites32x32.Sprite(uint8(id))
+
+			pix    := sprite.Pix()
+			stride := sprite.Stride()
+
+			receiver.sprites32x32[id].Pix     = pix
+			receiver.sprites32x32[id].Stride  = stride
+		}
+	}
+}
+
 
 func (receiver *Type) PalettedRaster() c80palettedraster.Type {
 	if nil == receiver {
