@@ -3,7 +3,7 @@ package c80palettedframe_test
 import (
 	"github.com/reiver/go-font8x8"
 
-	"github.com/reiver/go-c80/frame"
+	"github.com/reiver/go-c80/palettedframe"
 
 	"image"
 	"image/color"
@@ -14,18 +14,29 @@ import (
 
 func TestType_DrawableImage(t *testing.T) {
 
-	var frame c80frame.Type
+	var buffer [c80palettedframe.ByteSize]uint8
+	var palettedframe c80palettedframe.Type
+	{
+		var err error
+
+		palettedframe, err = c80palettedframe.Wrap(buffer[:])
+		if nil != err {
+			t.Errorf("Received an error, but did not actually expect one.")
+			t.Logf("ERROR: (%T) %q", err, err)
+			return
+		}
+	}
 
 	var bytes []byte
 	{
-		bytes = frame.Bytes()
+		bytes = palettedframe.Bytes()
 
 		if length := len(bytes); 0 >= length {
 			t.Errorf("The actual number of bytes is less than expected.")
 			t.Logf("LENGTH: %d", length)
 			return
 		}
-		if expected, actual := c80frame.ByteSize, len(bytes); expected != actual {
+		if expected, actual := c80palettedframe.ByteSize, len(bytes); expected != actual {
 			t.Errorf("The actual number of bytes is not what was expected.")
 			t.Logf("EXPECTED: %d", expected)
 			t.Logf("ACTUAL:   %d", actual)
@@ -43,6 +54,20 @@ func TestType_DrawableImage(t *testing.T) {
 		}
 	}
 
+	// Set the palette.
+	{
+		palette := palettedframe.Palette()
+
+		palette.Color(0).Poke(0x00,0x00,0x00, 0xff) // black
+		palette.Color(1).Poke(0x00,0x00,0xff, 0xff) // blue
+		palette.Color(2).Poke(0x00,0xff,0x00, 0xff) // green
+		palette.Color(3).Poke(0x00,0xff,0xff, 0xff) // cyan
+		palette.Color(4).Poke(0xff,0x00,0x00, 0xff) // red
+		palette.Color(5).Poke(0xff,0x00,0xff, 0xff) // purple
+		palette.Color(6).Poke( 255, 199,   6, 0xff) // yellow
+		palette.Color(7).Poke(0xff,0xff,0xff, 0xff) // white
+	}
+
 	// 1st Background color.
 	bg1 := struct{
 		Red  uint8
@@ -58,7 +83,7 @@ func TestType_DrawableImage(t *testing.T) {
 
 	// Set every pixel to the 1st background color.
 	{
-		drawable := frame.DrawableImage()
+		drawable := palettedframe.DrawableImage()
 
 		c := color.NRGBA{
 			R:bg1.Red,
@@ -67,8 +92,8 @@ func TestType_DrawableImage(t *testing.T) {
 			A:bg1.Alpha,
 		}
 
-		for y:=0; y<c80frame.Height; y++ {
-			for x:=0; x<c80frame.Width; x++ {
+		for y:=0; y<c80palettedframe.Height; y++ {
+			for x:=0; x<c80palettedframe.Width; x++ {
 				drawable.Set(x,y, c)
 			}
 		}
@@ -76,10 +101,10 @@ func TestType_DrawableImage(t *testing.T) {
 
 	// Check to see what is there AFTER the 1st time we draw anything is what we expect.
 	{
-		image := frame.DrawableImage()
+		image := palettedframe.DrawableImage()
 
-		for y:=0; y<c80frame.Height; y++ {
-			for x:=0; x<c80frame.Width; x++ {
+		for y:=0; y<c80palettedframe.Height; y++ {
+			for x:=0; x<c80palettedframe.Width; x++ {
 				color := image.At(x,y)
 
 				r,g,b,a := color.RGBA()
@@ -93,7 +118,7 @@ func TestType_DrawableImage(t *testing.T) {
 					t.Errorf("For (x,y)=(%d,%d), the actual rgba value for the pixel is not what was expected.", x,y)
 					t.Logf("EXPECTED (r,g,b,a) = (%d,%d,%d,%d)", eR,eG,eB,eA)
 					t.Logf("ACTUAL   (r,g,b,a) = (%d,%d,%d,%d)", r,g,b,a)
-					t.Log(frame.String())
+					t.Log(palettedframe.String())
 					return
 				}
 			}
@@ -120,7 +145,7 @@ func TestType_DrawableImage(t *testing.T) {
 		x := cx*8
 		y := cy*8
 
-		drawableImage := frame.DrawableImage()
+		drawableImage := palettedframe.DrawableImage()
 
 		rect := image.Rectangle{
 			Min: image.Point{
@@ -144,30 +169,27 @@ func TestType_DrawableImage(t *testing.T) {
 	}
 
 	// Check to see what is there AFTER the 2nd time we draw anything is what we expect.
-	for offset, value := range bytes {
-		channel := offset % 4
+	{
+		drawable := palettedframe.DrawableImage()
 
-		var expected byte
-		switch channel {
-		case 0:
-			expected = bg2.Red
-		case 1:
-			expected = bg2.Green
-		case 2:
-			expected = bg2.Blue
-		case 3:
-			expected = bg2.Alpha
-		default:
-			t.Error("This should never happen.")
-			return
-		}
+		for y:=0; y<c80palettedframe.Height; y++ {
+			for x:=0; x<c80palettedframe.Width; x++ {
 
-		if actual := value; expected != actual {
-			t.Errorf("For offset=%d (and thus channel=%d), the actual value for the pixel color channel is not what was expected.", offset, channel)
-			t.Logf("EXPECTED: %d", expected)
-			t.Logf("ACTUAL:   %d", actual)
-			t.Log(frame.String())
-			return
+				aR, aG, aB, aA := drawable.At(x,y).RGBA()
+
+				eR := uint32(bg2.Red)   * (0xffff/0xff)
+				eG := uint32(bg2.Green) * (0xffff/0xff)
+				eB := uint32(bg2.Blue)  * (0xffff/0xff)
+				eA := uint32(bg2.Alpha) * (0xffff/0xff)
+
+				if eR != aR || eG != aG || eB != aB || eA != aA {
+					t.Errorf("For (x,y)=(%d,%d), the actual value for the pixel color is not what was expected.", x,y)
+					t.Logf("EXPECTED (r,g,b,a)=(%d,%d,%d,%d)", eR, eG, eB, aA)
+					t.Logf("ACTUAL   (r,g,b,a)=(%d,%d,%d,%d)", aR, aG, aB, aA)
+					t.Log(palettedframe.String())
+					return
+				}
+			}
 		}
 	}
 
@@ -179,7 +201,7 @@ func TestType_DrawableImage(t *testing.T) {
 
 	// Draw the letter "N".
 	{
-		drawable := frame.DrawableImage()
+		drawable := palettedframe.DrawableImage()
 
 		var character rune = 'N'
 
@@ -200,71 +222,51 @@ func TestType_DrawableImage(t *testing.T) {
 	}
 
 	// Check to see what is there AFTER the 3nd time we draw anything is what we expect.
-	for offset, value := range bytes {
-		x := (offset / 4) % c80frame.Width
-		y := (offset / 4) / c80frame.Width
+	{
+		drawable := palettedframe.DrawableImage()
 
-		// If we are on the stop where we drew the character.
-		if (printY <= y && y < (printY+fontHeight)) && (printX <= x && x < (printX+fontWidth)) {
-			channel := offset % 4
+		for y:=0; y<c80palettedframe.Height; y++ {
+			for x:=0; x<c80palettedframe.Width; x++ {
 
-			switch channel {
-			case 0,1,2:
-				if expected1, expected2, actual := byte(0x00), byte(0xff), value; expected1 != actual && expected2 != actual {
-					t.Errorf("For offset=%d (and thus channel=%d), the actual value for the pixel color channel is not what was expected.", offset, channel)
-					t.Log("WE ARE IN THE AREA WE DREW THE CHARACTER....")
-					t.Logf("EXPECTED 1: %d", expected1)
-					t.Logf("EXPECTED 2: %d", expected2)
-					t.Logf("ACTUAL:     %d", actual)
-					t.Log(frame.String())
+				// If we are on the spot where we drew the character.
+				if (printY <= y && y < (printY+fontHeight)) && (printX <= x && x < (printX+fontWidth)) {
+					aR, aG, aB, aA := drawable.At(x,y).RGBA()
+
+					e1R, e1G, e1B, e1A := uint32(0x0000),uint32(0x0000),uint32(0x0000), uint32(0xffff)
+					e2R, e2G, e2B, e2A := uint32(0xffff),uint32(0xffff),uint32(0xffff), uint32(0xffff)
+
+					if (e1R != aR && e2R != aR) || (e1G != aG && e2G != aG) || (e1B != aB && e2B != aB) || (e1A != aA && e2A != aA) {
+						t.Errorf("For (x,y)=(%d,%d), the actual value for the pixel color is not what was expected.", x,y)
+						t.Logf("EXPECTED 1 (r,g,b,a)=(%d,%d,%d,%d)", e1R, e1G, e1B, e1A)
+						t.Logf("EXPECTED 2 (r,g,b,a)=(%d,%d,%d,%d)", e2R, e2G, e2B, e2A)
+						t.Logf("ACTUAL     (r,g,b,a)=(%d,%d,%d,%d)", aR, aG, aB, aA)
+						return
+					}
+					continue
+				}
+
+				aR, aG, aB, aA := drawable.At(x,y).RGBA()
+
+				eR := uint32(bg2.Red)   * (0xffff/0xff)
+				eG := uint32(bg2.Green) * (0xffff/0xff)
+				eB := uint32(bg2.Blue)  * (0xffff/0xff)
+				eA := uint32(bg2.Alpha) * (0xffff/0xff)
+
+				if eR != aR || eG != aG || eB != aB || eA != aA {
+					t.Errorf("For (x,y)=(%d,%d), the actual value for the pixel color is not what was expected.", x,y)
+					t.Logf("EXPECTED (r,g,b,a)=(%d,%d,%d,%d)", eR, eG, eB, aA)
+					t.Logf("ACTUAL   (r,g,b,a)=(%d,%d,%d,%d)", aR, aG, aB, aA)
+					t.Log(palettedframe.String())
 					return
 				}
-			case 3:
-				if expected, actual := byte(0xff), value; expected != actual {
-					t.Errorf("For offset=%d (and thus channel=%d), the actual value for the pixel color channel is not what was expected.", offset, channel)
-					t.Log("WE ARE IN THE AREA WE DREW THE CHARACTER....")
-					t.Logf("EXPECTED: %d", expected)
-					t.Logf("ACTUAL:   %d", actual)
-					t.Log(frame.String())
-					return
-				}
-			default:
-				t.Error("This should never happen.")
-				return
 			}
-			continue
-		}
-
-		channel := offset % 4
-
-		var expected byte
-		switch channel {
-		case 0:
-			expected = bg2.Red
-		case 1:
-			expected = bg2.Green
-		case 2:
-			expected = bg2.Blue
-		case 3:
-			expected = bg2.Alpha
-		default:
-			t.Error("This should never happen.")
-			return
-		}
-
-		if actual := value; expected != actual {
-			t.Errorf("For offset=%d (and thus channel=%d), the actual value for the pixel color channel is not what was expected.", offset, channel)
-			t.Logf("EXPECTED: %d", expected)
-			t.Logf("ACTUAL:   %d", actual)
-			t.Log(frame.String())
-			return
 		}
 	}
 
 	{
-		expected := "IMAGE:iVBORw0KGgoAAAANSUhEUgAAAQAAAAEgCAIAAADUvDoHAAADWUlEQVR4nOzbIW6FQBRAUWh+uqbu33RNVVRMUlHDfEXy7jlugkFwmeElvK7vzwOqPp6+AXiSAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGmvm+tfP8dxnOe5Vtd1raU/iZlhawdYzz3Ms3sE0gAjbQWwjkAaYJ7dHeDvMwAmeWMKpAHmMQYl7WYM+u+tbxNgmJsAzPuZzRGINAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSfgMAAP//5bwU5weyrzMAAAAASUVORK5CYII="
+		expected := "IMAGE:iVBORw0KGgoAAAANSUhEUgAAAQAAAAEgCAMAAABsAF1iAAADAFBMVEUAAAAAAP8A/wAA////AAD/AP//xwb///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB9MpZoAAABAHRSTlP//////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJj4ZeAAAAmtJREFUeJzs1DFqgzEQBtGtsve/cSAEjO3+f8XOVCo/PZDm53gB6AG6APQAXQB6gC4APUAXgB6gC0AP0AWgB+gC0AN0AegBugBex92Z2T1G8gaw5wH2OMD8Gcg5z/fxB5wHuP4EbgPMf3LO8x277ncB6AG6APQAXQB6gC4APUAXgB6gC0AP0AWgB+gC0AN0AegBugD0AF0AeoAuAD1AF4AeoAtAD9AFoAfoAtADdAHoAboA9ABdAHqALgA9QBeAHqALQA/QBaAH6ALQA3QB6AG6APQAXQB6gC4APUAXgB6gC0AP0AWgB+gC0AN0AegBugD0AF0AeoAuAD1AF4AeoAtAD9AFoAfoAtADdAHoAboA9ABdAHqALgA9QBeAHqALQA/QBaAH6ALQA3QB6AG6APQAXQB6gC4APUAXgB6gC0AP0AWgB+gC0AN0AegBugD0AF0AeoAuAD1AF4AeoAtAD9AFoAfoAtADdAHoAboA9ABdAHqALgA9QBeAHqALQA/QBaAH6ALQA3QB6AG6APQAXQB6gC4APUAXgB6gC0AP0AWgB+gC0AN0AegBugD0AF0AeoAuAD1AF4AeoAtAD9AFoAfoAtADdAHoAboA9ABdAHqALgA9QBeAHqALQA/QBaAH6ALQA3QB6AG6APQAXQB6gC4APUAXgB6gC0AP0AWgB+gC0AN0AegBugD0AF0AeoAuAD1AF4AeoAtAD9AFoAfoAtADdAHoAboA9ABdAHqALgA9QBeAHqALQA/QBaAH6ALQA3QB6AG6APQAXQB6gC4APUAXgB6gC0AP0AWgB+gC0AN0AegBuvMAvwEAAP//bhC/yZZzBIIAAAAASUVORK5CYII="
 
-		actual := frame.String()
+		actual := palettedframe.String()
 
 		if expected != actual {
 			t.Errorf("The actual serialized value is not what was expected.")
