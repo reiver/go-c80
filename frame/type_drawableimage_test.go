@@ -266,7 +266,6 @@ func TestType_DrawableImage(t *testing.T) {
 
 		actual := frame.String()
 
-
 		if expected != actual {
 			t.Errorf("The actual serialized value is not what was expected.")
 			t.Logf("EXPECTED: %q", expected)
