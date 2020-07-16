@@ -17,7 +17,7 @@ func (receiver *Type) String() string {
 	{
 		var pngBuffer bytes.Buffer
 
-		png.Encode(&pngBuffer, receiver.DrawImage())
+		png.Encode(&pngBuffer, receiver.DrawableImage())
 
 		base64Encoded := base64.StdEncoding.EncodeToString(pngBuffer.Bytes())
 		buffer.WriteString(base64Encoded)

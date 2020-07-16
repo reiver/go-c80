@@ -12,7 +12,7 @@ import (
 	"testing"
 )
 
-func TestType_DrawImage(t *testing.T) {
+func TestType_DrawableImage(t *testing.T) {
 
 	var frame c80frame.Type
 
@@ -58,7 +58,7 @@ func TestType_DrawImage(t *testing.T) {
 
 	// Set every pixel to the 1st background color.
 	{
-		drawable := frame.DrawImage()
+		drawable := frame.DrawableImage()
 
 		c := color.NRGBA{
 			R:bg1.Red,
@@ -76,7 +76,7 @@ func TestType_DrawImage(t *testing.T) {
 
 	// Check to see what is there AFTER the 1st time we draw anything is what we expect.
 	{
-		image := frame.DrawImage()
+		image := frame.DrawableImage()
 
 		for y:=0; y<c80frame.Height; y++ {
 			for x:=0; x<c80frame.Width; x++ {
@@ -120,7 +120,7 @@ func TestType_DrawImage(t *testing.T) {
 		x := cx*8
 		y := cy*8
 
-		drawImage := frame.DrawImage()
+		drawableImage := frame.DrawableImage()
 
 		rect := image.Rectangle{
 			Min: image.Point{
@@ -140,7 +140,7 @@ func TestType_DrawImage(t *testing.T) {
 			A:bg2.Alpha,
 		}
 
-		draw.Draw(drawImage, rect, &image.Uniform{c}, image.ZP, draw.Src)
+		draw.Draw(drawableImage, rect, &image.Uniform{c}, image.ZP, draw.Src)
 	}
 
 	// Check to see what is there AFTER the 2nd time we draw anything is what we expect.
@@ -179,7 +179,7 @@ func TestType_DrawImage(t *testing.T) {
 
 	// Draw the letter "N".
 	{
-		drawable := frame.DrawImage()
+		drawable := frame.DrawableImage()
 
 		var character rune = 'N'
 
