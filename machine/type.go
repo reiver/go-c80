@@ -17,9 +17,14 @@ type Type struct {
 	frame c80frame.Type
 	memory [memoryByteSize]uint8
 
-	tiles        [c80sheet8x8.Len]image.Paletted
-	sprites8x8   [c80sheet8x8.Len]image.Paletted
-	sprites32x32 [c80sheet32x32.Len]image.Paletted
+	// These make it so stuff in the memory work with Go's built-in
+	// "image", "image/color", and "image/draw" packages.
+	images struct{
+		frame        image.NRGBA
+		tiles        [c80sheet8x8.Len]image.Paletted
+		sprites8x8   [c80sheet8x8.Len]image.Paletted
+		sprites32x32 [c80sheet32x32.Len]image.Paletted
+	}
 }
 
 // Init initialized Type. Type needs to be initialized before it is used.
@@ -29,44 +34,64 @@ func (receiver *Type) Init() {
 	}
 
 	{
+		pix    := receiver.frame.Pix()
+		stride := receiver.frame.Stride()
+
+		receiver.images.frame = image.NRGBA{
+			Pix:    pix,
+			Stride: stride,
+			Rect: image.Rectangle{
+				Min: image.Point{
+					X:0,
+					Y:0,
+				},
+				Max: image.Point{
+					X:c80frame.Width,
+					Y:c80frame.Height,
+				},
+			},
+		}
+	}
+
+	{
 		tiles := receiver.Tiles()
 
-		for id:=0; id<len(receiver.tiles); id++ {
+		for id:=0; id<len(receiver.images.tiles); id++ {
 			sprite := tiles.Sprite(uint8(id))
 
 			pix    := sprite.Pix()
 			stride := sprite.Stride()
 
-			receiver.tiles[id].Pix     = pix
-			receiver.tiles[id].Stride  = stride
+			receiver.images.tiles[id].Pix     = pix
+			receiver.images.tiles[id].Stride  = stride
 		}
 	}
 
 	{
 		sprites8x8 := receiver.Sprites8x8()
 
-		for id:=0; id<len(receiver.sprites8x8); id++ {
+		for id:=0; id<len(receiver.images.sprites8x8); id++ {
 			sprite := sprites8x8.Sprite(uint8(id))
 
 			pix    := sprite.Pix()
 			stride := sprite.Stride()
 
-			receiver.sprites8x8[id].Pix     = pix
-			receiver.sprites8x8[id].Stride  = stride
+			receiver.images.sprites8x8[id].Pix     = pix
+			receiver.images.sprites8x8[id].Stride  = stride
 		}
 	}
 
 	{
 		sprites32x32 := receiver.Sprites32x32()
 
-		for id:=0; id<len(receiver.sprites32x32); id++ {
+		for id:=0; id<len(receiver.images.sprites32x32); id++ {
 			sprite := sprites32x32.Sprite(uint8(id))
 
 			pix    := sprite.Pix()
 			stride := sprite.Stride()
 
-			receiver.sprites32x32[id].Pix     = pix
-			receiver.sprites32x32[id].Stride  = stride
+			receiver.images.sprites32x32[id].Pix     = pix
+			receiver.images.sprites32x32[id].Stride  = stride
 		}
 	}
 }

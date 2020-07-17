@@ -1,7 +1,7 @@
 package c80machine
 
 func (receiver *Type) Dye(index uint8) {
-	if nil != receiver {
+	if nil == receiver {
 		return
 	}
 

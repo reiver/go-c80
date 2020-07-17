@@ -9,5 +9,5 @@ func (receiver *Type) Image() draw.Image {
 		return nil
 	}
 
-	return &receiver.images.frame
+	return &(receiver.images.frame)
 }
