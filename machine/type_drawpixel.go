@@ -4,25 +4,17 @@ import (
 	"image/color"
 )
 
-func (receiver *Type) DrawPixel(x int, y int, index uint8) {
+func (receiver *Type) DrawPixel(x int, y int, color color.Color) error {
 	if nil == receiver {
-		return
+		return errNilReceiver
 	}
 
-	var color color.Color
-	{
-		palette := receiver.Palette()
-		if palette.IsNothing() {
-			return
-		}
-
-		color = palette.Color(index)
+	img := receiver.Image()
+	if nil == img {
+		return errInternalError
 	}
 
-	image := receiver.Image()
-	if nil == receiver {
-		return
-	}
+	img.Set(x,y, color)
 
-	image.Set(x,y, color)
+	return nil
 }

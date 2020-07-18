@@ -10,6 +10,37 @@ import (
 	"image/draw"
 )
 
+func (receiver *Type) Draw(img image.Image, x int, y int) error {
+	if nil == receiver {
+		return errNilReceiver
+	}
+
+	var dst draw.Image = &(receiver.images.frame)
+
+	var rect image.Rectangle
+	{
+		bounds := img.Bounds()
+
+		width  := bounds.Max.X - bounds.Min.X
+		height := bounds.Max.Y - bounds.Min.Y
+
+		rect = image.Rectangle{
+			Min: image.Point{
+				X:x,
+				Y:y,
+			},
+			Max: image.Point{
+				X:x+width,
+				Y:y+height,
+			},
+		}
+	}
+
+	draw.Draw(dst, rect, img, image.ZP, draw.Src)
+
+	return nil
+}
+
 func (receiver *Type) DrawRaster() {
 	if nil == receiver {
 		return
