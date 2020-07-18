@@ -9,6 +9,7 @@ type Type struct {
 	R uint
 	G uint
 	B uint
+	A uint
 }
 
 func (receiver Type) At(x, y int) color.Color {
@@ -30,8 +31,7 @@ func (receiver Type) RGBA() (r, g, b, a uint32) {
 	r = uint32(receiver.R) * (0xffff/0xff)
 	g = uint32(receiver.G) * (0xffff/0xff)
 	b = uint32(receiver.B) * (0xffff/0xff)
-
-	a = uint32(0xffff)
+	a = uint32(receiver.A) * (0xffff/0xff)
 
 	return r,g,b,a
 }
