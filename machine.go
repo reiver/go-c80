@@ -9,6 +9,8 @@ var (
 )
 
 func init() {
+	machine.Init()
+
 	palette := machine.Palette()
 
 	palette.Color( 0).Poke(  1,  1,  1, 255) // black
