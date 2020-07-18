@@ -6,10 +6,10 @@ import (
 )
 
 type Type struct {
-	R uint
-	G uint
-	B uint
-	A uint
+	R uint8
+	G uint8
+	B uint8
+	A uint8
 }
 
 func (receiver Type) At(x, y int) color.Color {
