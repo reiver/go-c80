@@ -80,9 +80,9 @@ func ExampleDrawPixel() {
 		//                           7
 
 		//                           0
-		c80.Draw(c80.Pixel( 6), left+1, top+7, 6)
-		c80.Draw(c80.Pixel( 6), left+2, top+7, 6)
-		c80.Draw(c80.Pixel( 6), left+3, top+7, 6)
+		c80.Draw(c80.Pixel( 6), left+1, top+7)
+		c80.Draw(c80.Pixel( 6), left+2, top+7)
+		c80.Draw(c80.Pixel( 6), left+3, top+7)
 		//                           4
 		//                           5
 		//                           6
