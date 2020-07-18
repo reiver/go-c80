@@ -4,24 +4,24 @@ import (
 	"github.com/reiver/go-c80/palette"
 )
 
-func Colorize(a ...interface{}) {
+func Colorize(a ...interface{}) error {
 
 	if nil == a {
-		return
+		return errBadRequest
 	}
 	if 0 >= len(a) {
-		return
+		return errBadRequest
 	}
 
 	if 1 < len(a) {
-		return
+		return errBadRequest
 	}
 
 	a0 := a[0]
 
 	s0, casted := a0.(string)
 	if !casted {
-		return
+		return errBadRequest
 	}
 
 	var p []byte
@@ -32,19 +32,21 @@ func Colorize(a ...interface{}) {
 		}
 	}
 	if nil == p {
-		return
+		return errInternalError
 	}
 	if 0 >= len(p) {
-		return
+		return errInternalError
 	}
 	if c80palette.ByteSize != len(p) {
-		return
+		return errInternalError
 	}
 
 	palette := machine.Palette()
 	if palette.IsNothing() {
-		return
+		return errInternalError
 	}
 
 	palette.Replace(p...)
+
+	return nil
 }
