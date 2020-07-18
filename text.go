@@ -1,13 +1,11 @@
 package c80
 
 import (
+	"github.com/reiver/go-c80/text"
+
 	"image"
 )
 
 func Text(msg string) image.Image {
-	return machine.Text(msg)
-}
-
-func DrawText(x int, y int, msg string) {
-	machine.DrawText(x,y, msg)
+	return c80text.Type{msg}
 }
