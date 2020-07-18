@@ -7,6 +7,29 @@ import (
 	"image"
 )
 
+// Draw draws the ‘img’ at (‘x’,‘y’).
+//
+// Examples
+//
+// Here are some examples of Draw being used:
+//
+//	err := c80.Draw(c80.Dye(index), 0, 0)
+//
+// And:
+//
+//	err := c80.Draw(c80.Pixel(index), x, y)
+//
+// And:
+//
+//	err := c80.Draw(c80.Map(mx, my, width,height), x, y)
+//
+// And:
+//
+//	err := c80.Draw(c80.Sprite("32x32", id), x, y)
+//
+// And:
+//
+//	err := c80.Draw(c80.Text("Hello world!"), x, y)
 func Draw(img image.Image, x int, y int) error {
 	switch casted := img.(type) {
 	case c80dye.Type:

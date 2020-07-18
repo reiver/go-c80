@@ -4,6 +4,13 @@ import (
 	"github.com/reiver/go-c80/palette"
 )
 
+// Colorize sets the color palette.
+//
+// Example
+//
+// Here are some examples of Colorize being used:
+//
+//	err := c80.Colorize("tia128")
 func Colorize(a ...interface{}) error {
 
 	if nil == a {
