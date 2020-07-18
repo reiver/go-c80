@@ -1,7 +1,7 @@
-package c80pixel_test
+package c80pel_test
 
 import (
-	"github.com/reiver/go-c80/pixel"
+	"github.com/reiver/go-c80/pel"
 
 	"math/rand"
 	"time"
@@ -19,10 +19,10 @@ func TestType_Poke(t *testing.T) {
 			uint8(randomness.Intn(16)),
 		}
 
-		var pixel c80pixel.Type
+		var pel c80pel.Type
 		var err error
 
-		pixel, err = c80pixel.Wrap(buffer[:])
+		pel, err = c80pel.Wrap(buffer[:])
 		if nil != err {
 			t.Errorf("For test #%d, ", testNumber)
 			t.Logf("ERROR: (%T) %q", err, err)
@@ -31,9 +31,9 @@ func TestType_Poke(t *testing.T) {
 
 		expected := uint8(randomness.Intn(16))
 
-		pixel.Poke(expected)
+		pel.Poke(expected)
 
-		actual := pixel.Peek()
+		actual := pel.Peek()
 
 		if expected != actual {
 			t.Errorf("For test #%d, the actual value is not what was expected.", testNumber)

@@ -1,4 +1,4 @@
-package c80pixel
+package c80pel
 
 func (receiver Type) IsSomething() bool {
 	return !receiver.IsNothing()

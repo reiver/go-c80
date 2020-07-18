@@ -1,3 +1,3 @@
-package c80pixel
+package c80pel
 
 const ByteSize = 1

@@ -1,4 +1,4 @@
-package c80pixel
+package c80pel
 
 func Wrap(p []uint8) (Type, error) {
 	if nil == p {

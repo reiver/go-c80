@@ -1,27 +1,18 @@
-package c80pixel_test
+package c80pel_test
 
 import (
-	"github.com/reiver/go-c80/color"
+	"github.com/reiver/go-c80/pel"
 
 	"testing"
 )
 
-func TestType_IsSomething(t *testing.T) {
+func TestType_Nothing(t *testing.T) {
 
-	var buffer [4]uint8 = [4]uint8{11,22,33,44}
-
-	var color c80color.Type
-	var err error
-
-	color, err = c80color.Wrap(buffer[:])
-	if nil != err {
-		t.Errorf("Received an error, but did not actually expect one/")
-		return
-	}
+	var pel c80pel.Type
 
 	{
 		expected := true
-		actual   := color.IsSomething()
+		actual   := pel.IsNothing()
 
 		if expected != actual {
 			t.Errorf("The actual value is not what was expected.")
@@ -32,7 +23,7 @@ func TestType_IsSomething(t *testing.T) {
 
 	{
 		expected := false
-		actual   := color.IsNothing()
+		actual   := pel.IsSomething()
 
 		if expected != actual {
 			t.Errorf("The actual value is not what was expected.")

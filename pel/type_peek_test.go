@@ -1,7 +1,7 @@
-package c80pixel_test
+package c80pel_test
 
 import (
-	"github.com/reiver/go-c80/pixel"
+	"github.com/reiver/go-c80/pel"
 
 	"testing"
 )
@@ -89,17 +89,17 @@ func TestType_Peek(t *testing.T) {
 
 	for testNumber, test := range tests {
 
-		var pixel c80pixel.Type
+		var pel c80pel.Type
 		var err error
 
-		pixel, err = c80pixel.Wrap(test.Value[:])
+		pel, err = c80pel.Wrap(test.Value[:])
 		if nil != err {
 			t.Errorf("For test #%d, received an error, but did not actually expect one.", testNumber)
 			t.Logf("ERROR: (%T) %q", err, err)
 			continue
 		}
 
-		actual := pixel.Peek()
+		actual := pel.Peek()
 
 		expected := test.Expected
 

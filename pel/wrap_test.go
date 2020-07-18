@@ -1,7 +1,7 @@
-package c80pixel_test
+package c80pel_test
 
 import (
-	"github.com/reiver/go-c80/pixel"
+	"github.com/reiver/go-c80/pel"
 
 	"math/rand"
 	"time"
@@ -14,7 +14,7 @@ func TestWrap(t *testing.T) {
 	{
 		var p []uint8 = nil
 
-		_, err := c80pixel.Wrap(p)
+		_, err := c80pel.Wrap(p)
 		if nil == err {
 			t.Errorf("Expected an error, but did not actually get one.")
 		}
@@ -27,7 +27,7 @@ func TestWrap(t *testing.T) {
 
 		var p []uint8 = buffer[:]
 
-		_, err := c80pixel.Wrap(p)
+		_, err := c80pel.Wrap(p)
 		if nil == err {
 			t.Errorf("Expected an error, but did not actually get one.")
 		}
@@ -37,7 +37,7 @@ func TestWrap(t *testing.T) {
 
 		var p []uint8 = buffer[:]
 
-		_, err := c80pixel.Wrap(p)
+		_, err := c80pel.Wrap(p)
 		if nil == err {
 			t.Errorf("Expected an error, but did not actually get one.")
 		}
@@ -47,7 +47,7 @@ func TestWrap(t *testing.T) {
 
 		var p []uint8 = buffer[:]
 
-		_, err := c80pixel.Wrap(p)
+		_, err := c80pel.Wrap(p)
 		if nil == err {
 			t.Errorf("Expected an error, but did not actually get one.")
 		}
@@ -57,7 +57,7 @@ func TestWrap(t *testing.T) {
 
 		var p []uint8 = buffer[:]
 
-		_, err := c80pixel.Wrap(p)
+		_, err := c80pel.Wrap(p)
 		if nil == err {
 			t.Errorf("Expected an error, but did not actually get one.")
 		}
@@ -67,7 +67,7 @@ func TestWrap(t *testing.T) {
 
 		var p []uint8 = buffer[:]
 
-		_, err := c80pixel.Wrap(p)
+		_, err := c80pel.Wrap(p)
 		if nil == err {
 			t.Errorf("Expected an error, but did not actually get one.")
 		}
@@ -77,7 +77,7 @@ func TestWrap(t *testing.T) {
 
 		var p []uint8 = buffer[:]
 
-		_, err := c80pixel.Wrap(p)
+		_, err := c80pel.Wrap(p)
 		if nil == err {
 			t.Errorf("Expected an error, but did not actually get one.")
 		}
@@ -90,7 +90,7 @@ func TestWrap(t *testing.T) {
 
 		var p []uint8 = buffer[:]
 
-		_, err := c80pixel.Wrap(p)
+		_, err := c80pel.Wrap(p)
 		if nil != err {
 			t.Errorf("Did not expect an error, but did actually gott one.")
 			t.Logf("ERROR: (%T) %q", err, err)
@@ -110,7 +110,7 @@ func TestWrap(t *testing.T) {
 
 		var p []uint8 = buffer[:]
 
-		color, err := c80pixel.Wrap(p)
+		color, err := c80pel.Wrap(p)
 		if nil != err {
 			t.Errorf("For test #%d, did not expect an error, but did actually gott one.", testNumber)
 			t.Logf("ERROR: (%T) %q", err, err)
