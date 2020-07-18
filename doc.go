@@ -10,10 +10,12 @@ Example
 	
 	c80.Begin()
 	
-	c80.DrawMap(0,0,256,256, mapX, mapY)
-	c80.DrawSprite("32x32", 5, x, y)
+	c80.Draw(Map(256,256, mapX, mapY), 0, 0)
+	c80.Draw(Sprite("32x32", id),      x, y)
 	
 	c80.End()
+
+
 
 */
 package c80
