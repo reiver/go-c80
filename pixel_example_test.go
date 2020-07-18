@@ -6,7 +6,7 @@ import (
 	"fmt"
 )
 
-func ExampleDrawPixel() {
+func ExamplePixel() {
 
 	// Make the entire raster image the color of color 0 in the (color) palette.
 	c80.Dye(0)
