@@ -1,5 +1,5 @@
 package c80
 
-func Publish(s string) {
+func PublishText(s string) {
 	machine.Publish(s)
 }
