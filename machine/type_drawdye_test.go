@@ -8,7 +8,7 @@ import (
 	"testing"
 )
 
-func TestType_Dye(t *testing.T) {
+func TestType_DrawDye(t *testing.T) {
 
 	var machine c80machine.Type
 	machine.Init()
@@ -75,7 +75,7 @@ func TestType_Dye(t *testing.T) {
 		}
 	}
 
-	machine.Dye(index)
+	machine.DrawDye(index)
 
 	// Check the value for the frame after it has been died.
 	{

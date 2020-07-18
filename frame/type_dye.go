@@ -1,20 +1,23 @@
 package c80frame
 
 import (
-	"github.com/reiver/go-c80/color"
-
 	"image"
+	"image/color"
 	"image/draw"
 )
 
-func (receiver *Type) Dye(color c80color.Type) {
-	if color.IsNothing() {
-		return
+func (receiver *Type) Dye(c color.Color) error {
+	if nil == receiver {
+		return errNilReceiver
+	}
+
+	if nil == c {
+		return errNilColor
 	}
 
 	dst := receiver.DrawableImage()
 	if nil == dst {
-		return
+		return errInternalError
 	}
 
 	var rect image.Rectangle
@@ -34,7 +37,9 @@ func (receiver *Type) Dye(color c80color.Type) {
 		}
 	}
 
-	src := &image.Uniform{color}
+	src := &image.Uniform{c}
 
 	draw.Draw(dst, rect, src, image.ZP, draw.Src)
+
+	return nil
 }

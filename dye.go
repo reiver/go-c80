@@ -1,7 +1,18 @@
 package c80
 
-// Dye changes the color of the entire raster image
-// to the color represented by the (color) palette index.
-func Dye(index uint8) {
-	machine.Dye(index)
+import (
+	"github.com/reiver/go-c80/dye"
+
+	"image"
+)
+
+func Dye(index uint8) image.Image {
+	r,g,b,a := machine.Palette().Color(index).Peek()
+
+	return c80dye.Type{
+		R:r,
+		G:g,
+		B:b,
+		A:a,
+	}
 }

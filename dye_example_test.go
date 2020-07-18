@@ -9,7 +9,7 @@ import (
 func ExampleDye() {
 
 	// Make the entire raster image the color of color 3 in the (color) palette.
-	c80.Dye(3)
+	c80.Draw(c80.Dye(3), 0,0)
 
 	// Show the raster image.
 	//
