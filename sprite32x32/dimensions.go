@@ -1,11 +1,11 @@
 package c80sprite32x32
 
 import (
-	"github.com/reiver/go-c80/pixel"
+	"github.com/reiver/go-c80/pel"
 )
 
 const (
 	Width  = 32
 	Height = 32
-	Depth = c80pixel.ByteSize
+	Depth = c80pel.ByteSize
 )

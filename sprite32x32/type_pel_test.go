@@ -9,7 +9,7 @@ import (
 	"testing"
 )
 
-func TestType_Pixel(t *testing.T) {
+func TestType_Pel(t *testing.T) {
 
 	randomness := rand.New(rand.NewSource( time.Now().UTC().UnixNano() ))
 
@@ -33,7 +33,7 @@ func TestType_Pixel(t *testing.T) {
 
 		for y:=0; y<c80sprite32x32.Height; y++ {
 			for x:=0; x<c80sprite32x32.Width; x++ {
-				index := sprite.Pixel(x,y).Peek()
+				index := sprite.Pel(x,y).Peek()
 
 				if 0 != index {
 					numNotZero++
@@ -42,7 +42,7 @@ func TestType_Pixel(t *testing.T) {
 		}
 
 		if 0 == numNotZero {
-			t.Errorf("Probably peeking on the pixel is not working... probably.")
+			t.Errorf("Probably peeking on the pel is not working... probably.")
 			t.Logf("Number of non-zero color palette indexes: %d", numNotZero)
 			return
 		}
@@ -53,12 +53,12 @@ func TestType_Pixel(t *testing.T) {
 
 			expectedIndex := uint8(randomness.Intn(16))
 
-			sprite.Pixel(x,y).Poke(expectedIndex)
+			sprite.Pel(x,y).Poke(expectedIndex)
 
-			actualIndex := sprite.Pixel(x,y).Peek()
+			actualIndex := sprite.Pel(x,y).Peek()
 
 			if expected, actual := expectedIndex, actualIndex; expected != actual {
-				t.Errorf("For pixel (x,y)=(%d,%d) in sprite, actual index is not what was expected.", x, y)
+				t.Errorf("For pel (x,y)=(%d,%d) in sprite, actual index is not what was expected.", x, y)
 				t.Logf("EXPECTED: %d, ", expected)
 				t.Logf("ACTUAL:   %d, ", actual)
 				continue
