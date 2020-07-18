@@ -1,7 +1,7 @@
 package c80
 
 import (
-	"draw/image"
+	"image/draw"
 )
 
 func Image() draw.Image {
