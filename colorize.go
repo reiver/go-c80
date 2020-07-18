@@ -4,7 +4,7 @@ import (
 	"github.com/reiver/go-c80/palette"
 )
 
-func AlterPalette(a ...interface{}) {
+func Colorize(a ...interface{}) {
 
 	if nil == a {
 		return
