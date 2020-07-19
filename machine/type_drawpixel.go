@@ -9,12 +9,7 @@ func (receiver *Type) DrawPixel(x int, y int, color color.Color) error {
 		return errNilReceiver
 	}
 
-	img := receiver.Image()
-	if nil == img {
-		return errInternalError
-	}
-
-	img.Set(x,y, color)
+	receiver.Frame().Set(x,y, color)
 
 	return nil
 }
