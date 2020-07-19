@@ -1,10 +1,10 @@
 package c80
 
 import (
-	"github.com/reiver/go-c80/palette"
+	"github.com/reiver/go-palette2048"
 )
 
-var palette_tia128 [c80palette.ByteSize]byte = [c80palette.ByteSize]byte{
+var palette_tia128 [palette2048.ByteSize]byte = [palette2048.ByteSize]byte{
 	0x00,0x00,0x00, 255, // 0,0
 	0x40,0x40,0x40, 255, // 0,1
 	0x6C,0x6C,0x6C, 255, // 0,2

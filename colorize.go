@@ -1,7 +1,7 @@
 package c80
 
 import (
-	"github.com/reiver/go-c80/palette"
+	"github.com/reiver/go-palette2048"
 )
 
 // Colorize sets the color palette.
@@ -36,6 +36,8 @@ func Colorize(a ...interface{}) error {
 		switch s0 {
 		case "tia128":
 			p = palette_tia128[:]
+		case "vt":
+			p = palette_vt[:]
 		}
 	}
 	if nil == p {
@@ -44,16 +46,18 @@ func Colorize(a ...interface{}) error {
 	if 0 >= len(p) {
 		return errInternalError
 	}
-	if c80palette.ByteSize != len(p) {
+	if palette2048.ByteSize != len(p) {
 		return errInternalError
 	}
 
 	palette := machine.Palette()
-	if palette.IsNothing() {
+	if nil == palette {
 		return errInternalError
 	}
 
-	palette.Replace(p...)
+	for i:=0; i<len(palette); i++ {
+		palette[i] = p[i]
+	}
 
 	return nil
 }
