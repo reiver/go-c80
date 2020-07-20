@@ -1,10 +1,6 @@
 package c80
 
 import (
-	"github.com/reiver/go-c80/dye"
-
-	"github.com/reiver/go-pel"
-
 	"image"
 )
 
