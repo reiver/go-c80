@@ -8,6 +8,7 @@ import (
 
 func ExampleDraw() {
 
+	// Set the color palette to "vt".
 	err := c80.Colorize("vt")
 	if nil != err {
 		fmt.Printf("ERROR: could not set the palette: %s", err)
@@ -18,16 +19,20 @@ func ExampleDraw() {
 	const fgIndex = 7 // 7 is white in the "vt" color palette.
 
 
+	// Clear the whole frame with the backgroud color.
+	//
+	// That means that every pixel of the frame will have the same color.
 	err = c80.Draw(c80.Dye(bgIndex))
 	if nil != err {
 		fmt.Printf("ERROR: could not clear the image with color at index=%d: %s", bgIndex, err)
 		return
 	}
 
+
 	const left = 5
 	const top  = 10
 
-	// Here we draw something that looks like a key
+	// Here we draw something that looks like a key.
 	//
 	//	▄▄▄▄▄█▀█
 	//	▀ ▀  ▀▀▀
@@ -60,6 +65,13 @@ func ExampleDraw() {
 		c80.Draw(c80.Pixel(left+7, top+2, fgIndex))
 	}
 
+	// Here we output a serialized version of the frame.
+	//
+	// This will output something like:
+	//
+	//	IMAGE:base64-encoded-png
+	//
+	// Where "base64-encoded-png" is replaced with the base64 encoding of a PNG version of the raster image.
 	fmt.Print(c80.Serialize())
 
 	// Output:
