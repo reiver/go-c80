@@ -8,7 +8,7 @@ Example
 	
 	// ...
 	
-	c80.Draw(Map(mapX, mapY, width,height))
+	c80.Draw(c80.Map(mapX,mapY, width,height))
 	c80.Draw(c80.Relocate(x,y, Sprite("32x32", id)))
 
 
