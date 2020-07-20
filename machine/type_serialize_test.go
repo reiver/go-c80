@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestType_String(t *testing.T) {
+func TestType_Serialize(t *testing.T) {
 
 	tests := []struct{
 		Machine *c80machine.Type
@@ -26,9 +26,8 @@ func TestType_String(t *testing.T) {
 
 				const index = 2
 
-				machine.Palette().Color(index).Poke(0,0,0,255)
-				machine.Raster().Dye(index)
-				machine.DrawRaster()
+				machine.Palette().SetColorRGB(index,  0,0,0)
+				machine.DrawDye(machine.Palette().Color(index))
 
 				return &machine
 			}(),
@@ -40,9 +39,8 @@ func TestType_String(t *testing.T) {
 
 				const index = 1
 
-				machine.Palette().Color(index).Poke(255,199,6,255)
-				machine.Raster().Dye(index)
-				machine.DrawRaster()
+				machine.Palette().SetColorRGB(index,  255,199,6)
+				machine.DrawDye(machine.Palette().Color(index))
 
 				return &machine
 			}(),
@@ -54,9 +52,8 @@ func TestType_String(t *testing.T) {
 
 				const index = 11
 
-				machine.Palette().Color(index).Poke(0,111,184,255)
-				machine.Raster().Dye(index)
-				machine.DrawRaster()
+				machine.Palette().SetColorRGB(index,  0,111,184)
+				machine.DrawDye(machine.Palette().Color(index))
 
 				return &machine
 			}(),
@@ -66,7 +63,7 @@ func TestType_String(t *testing.T) {
 
 	for testNumber, test := range tests {
 
-		actual := test.Machine.String()
+		actual := test.Machine.Serialize()
 
 		if expected := test.Expected; expected != actual {
 			t.Errorf("For test #%d, the actual value was not what was expected." , testNumber)
