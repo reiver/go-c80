@@ -10,13 +10,10 @@ import (
 func Pixel(x,y int, index uint8) image.Image {
 	rgba := machine.Palette().Color(index).(rgba32.Slice)
 
-	return pel.RGBA{
+	return pel.ColorLinked{
 		X:x,
 		Y:y,
 
-		R: rgba[rgba32.OffsetRed],
-		G: rgba[rgba32.OffsetGreen],
-		B: rgba[rgba32.OffsetBlue],
-		A: rgba[rgba32.OffsetAlpha],
+		Color: rgba,
 	}
 }
