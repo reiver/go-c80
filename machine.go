@@ -1,8 +1,6 @@
 package c80
 
 import (
-	"github.com/reiver/go-rgba32"
-
 	"github.com/reiver/go-c80/machine"
 )
 

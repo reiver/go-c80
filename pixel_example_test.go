@@ -9,84 +9,84 @@ import (
 func ExamplePixel() {
 
 	// Make the entire raster image the color of color 0 in the (color) palette.
-	c80.Draw(c80.Dye(0), 0,0)
+	c80.Draw(c80.Dye(0))
 
 	// Draw something.
 	{
 		left := 20
 		top  := 30
 
-		//                           0
-		c80.Draw(c80.Pixel( 6), left+1, top+0)
-		c80.Draw(c80.Pixel( 6), left+2, top+0)
-		c80.Draw(c80.Pixel( 6), left+3, top+0)
-		c80.Draw(c80.Pixel( 6), left+4, top+0)
-		//                           5
-		//                           6
-		//                           7
+		//                      0
+		c80.Draw(c80.Pixel(left+1, top+0,  6))
+		c80.Draw(c80.Pixel(left+2, top+0,  6))
+		c80.Draw(c80.Pixel(left+3, top+0,  6))
+		c80.Draw(c80.Pixel(left+4, top+0 , 6))
+		//                      5
+		//                      6
+		//                      7
 
-		//                           0
-		//                           1
-		c80.Draw(c80.Pixel( 6), left+2, top+1)
-		c80.Draw(c80.Pixel( 6), left+3, top+1)
-		c80.Draw(c80.Pixel( 6), left+4, top+1)
-		c80.Draw(c80.Pixel( 6), left+5, top+1)
-		//                           6
-		//                           7
+		//                      0
+		//                      1
+		c80.Draw(c80.Pixel(left+2, top+1,  6))
+		c80.Draw(c80.Pixel(left+3, top+1,  6))
+		c80.Draw(c80.Pixel(left+4, top+1,  6))
+		c80.Draw(c80.Pixel(left+5, top+1,  6))
+		//                      6
+		//                      7
 
-		c80.Draw(c80.Pixel( 6), left+0, top+2)
-		//                           1
-		c80.Draw(c80.Pixel( 6), left+2, top+2)
-		c80.Draw(c80.Pixel(15), left+3, top+2)
-		c80.Draw(c80.Pixel( 6), left+4, top+2)
-		c80.Draw(c80.Pixel(15), left+5, top+2)
-		//                           6
-		c80.Draw(c80.Pixel( 6), left+7, top+2)
+		c80.Draw(c80.Pixel(left+0, top+2,  6))
+		//                      1
+		c80.Draw(c80.Pixel(left+2, top+2,  6))
+		c80.Draw(c80.Pixel(left+3, top+2, 15))
+		c80.Draw(c80.Pixel(left+4, top+2,  6))
+		c80.Draw(c80.Pixel(left+5, top+2, 15))
+		//                      6
+		c80.Draw(c80.Pixel(left+7, top+2,  6))
 
-		c80.Draw(c80.Pixel( 6), left+0, top+3)
-		//                           1
-		c80.Draw(c80.Pixel( 6), left+2, top+3)
-		c80.Draw(c80.Pixel( 6), left+3, top+3)
-		c80.Draw(c80.Pixel( 6), left+4, top+3)
-		c80.Draw(c80.Pixel( 6), left+5, top+3)
-		//                           6
-		c80.Draw(c80.Pixel( 6), left+7, top+3)
+		c80.Draw(c80.Pixel(left+0, top+3,  6))
+		//                      1
+		c80.Draw(c80.Pixel(left+2, top+3,  6))
+		c80.Draw(c80.Pixel(left+3, top+3,  6))
+		c80.Draw(c80.Pixel(left+4, top+3,  6))
+		c80.Draw(c80.Pixel(left+5, top+3,  6))
+		//                      6
+		c80.Draw(c80.Pixel(left+7, top+3,  6))
 
-		//                           0
-		c80.Draw(c80.Pixel( 6), left+1, top+4)
-		c80.Draw(c80.Pixel( 6), left+2, top+4)
-		c80.Draw(c80.Pixel( 6), left+3, top+4)
-		c80.Draw(c80.Pixel(15), left+4, top+4)
-		c80.Draw(c80.Pixel( 6), left+5, top+4)
-		c80.Draw(c80.Pixel( 6), left+6, top+4)
-		//                           7
+		//                      0
+		c80.Draw(c80.Pixel(left+1, top+4,  6))
+		c80.Draw(c80.Pixel(left+2, top+4,  6))
+		c80.Draw(c80.Pixel(left+3, top+4,  6))
+		c80.Draw(c80.Pixel(left+4, top+4, 15))
+		c80.Draw(c80.Pixel(left+5, top+4,  6))
+		c80.Draw(c80.Pixel(left+6, top+4,  6))
+		//                      7
 
-		//                           0
-		//                           1
-		c80.Draw(c80.Pixel( 6), left+2, top+5)
-		c80.Draw(c80.Pixel( 6), left+3, top+5)
-		c80.Draw(c80.Pixel( 6), left+4, top+5)
-		c80.Draw(c80.Pixel( 6), left+5, top+5)
-		//                           6
-		//                           7
+		//                      0
+		//                      1
+		c80.Draw(c80.Pixel(left+2, top+5,  6))
+		c80.Draw(c80.Pixel(left+3, top+5,  6))
+		c80.Draw(c80.Pixel(left+4, top+5,  6))
+		c80.Draw(c80.Pixel(left+5, top+5,  6))
+		//                      6
+		//                      7
 
-		c80.Draw(c80.Pixel( 6), left+0, top+6)
-		//                           1
-		c80.Draw(c80.Pixel( 6), left+2, top+6)
-		c80.Draw(c80.Pixel( 6), left+3, top+6)
-		c80.Draw(c80.Pixel( 6), left+4, top+6)
-		//                           5
-		//                           6
-		//                           7
+		c80.Draw(c80.Pixel(left+0, top+6,  6))
+		//                      1
+		c80.Draw(c80.Pixel(left+2, top+6,  6))
+		c80.Draw(c80.Pixel(left+3, top+6,  6))
+		c80.Draw(c80.Pixel(left+4, top+6,  6))
+		//                      5
+		//                      6
+		//                      7
 
-		//                           0
-		c80.Draw(c80.Pixel( 6), left+1, top+7)
-		c80.Draw(c80.Pixel( 6), left+2, top+7)
-		c80.Draw(c80.Pixel( 6), left+3, top+7)
-		//                           4
-		//                           5
-		//                           6
-		//                           7
+		//                      0
+		c80.Draw(c80.Pixel(left+1, top+7,  6))
+		c80.Draw(c80.Pixel(left+2, top+7,  6))
+		c80.Draw(c80.Pixel(left+3, top+7,  6))
+		//                      4
+		//                      5
+		//                      6
+		//                      7
 	}
 
 	// Show the raster image.
