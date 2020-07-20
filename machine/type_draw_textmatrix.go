@@ -19,7 +19,7 @@ func (receiver *Type) DrawTextMatrix() {
 		return
 	}
 
-	frame := receiver.Frame()
+	frame := receiver.frame()
 	if nil == frame {
 		return
 	}

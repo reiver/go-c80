@@ -25,6 +25,6 @@ func (receiver *Type) Draw(img image.Image) error {
 		return receiver.DrawPixel(casted.X, casted.Y, casted)
 
 	default:
-		return receiver.Frame().Draw(img)
+		return receiver.frame().Draw(img)
 	}
 }

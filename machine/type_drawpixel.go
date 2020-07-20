@@ -9,7 +9,7 @@ func (receiver *Type) DrawPixel(x int, y int, color color.Color) error {
 		return errNilReceiver
 	}
 
-	receiver.Frame().Set(x,y, color)
+	receiver.frame().Set(x,y, color)
 
 	return nil
 }

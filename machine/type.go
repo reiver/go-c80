@@ -24,8 +24,8 @@ func (receiver *Type) Palette() palette2048.Slice {
 	return palette2048.Slice(p)
 }
 
-// Frame provides access the machine's frame.
-func (receiver *Type) Frame() frame256x288.Slice {
+// frame provides access the machine's frame.
+func (receiver *Type) frame() frame256x288.Slice {
 	beginning := PTR_FRAME
 	ending    := beginning + LEN_FRAME
 
