@@ -1,0 +1,30 @@
+package c80machine
+
+import (
+	"image"
+	"image/color"
+)
+
+func (receiver *Type) At(x, y int) color.Color {
+	if nil == receiver {
+		return nil
+	}
+
+	return receiver.frame().At(x,y)
+}
+
+func (receiver *Type) Bounds() image.Rectangle {
+	if nil == receiver {
+		return image.Rectangle{}
+	}
+
+	return receiver.frame().Bounds()
+}
+
+func (receiver *Type) ColorModel() color.Model {
+	if nil == receiver {
+		return nil
+	}
+
+	return receiver.frame().ColorModel()
+}

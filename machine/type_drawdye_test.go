@@ -11,11 +11,10 @@ import (
 func TestType_DrawDye(t *testing.T) {
 
 	var machine c80machine.Type
-	machine.Init()
 
 	// Check the initial value for the machine.
 	{
-		var image image.Image = machine.Image()
+		var image image.Image = &machine
 
 		bounds := image.Bounds()
 		if (bounds.Max.Y - bounds.Min.Y) < 1 ||  (bounds.Max.X - bounds.Min.X) < 1 {
@@ -55,7 +54,7 @@ func TestType_DrawDye(t *testing.T) {
 	const index = 5
 
 	{
-		machine.Palette().Color(index).Poke(r,g,b,a)
+		machine.Palette().SetColorRGBA(index,  r,g,b,a)
 	}
 
 	{
@@ -75,11 +74,11 @@ func TestType_DrawDye(t *testing.T) {
 		}
 	}
 
-	machine.DrawDye(index)
+	machine.DrawDye(machine.Palette().Color(index))
 
 	// Check the value for the frame after it has been died.
 	{
-		var image image.Image = machine.Image()
+		var image image.Image = &machine
 
 		bounds := image.Bounds()
 		if (bounds.Max.Y - bounds.Min.Y) < 1 ||  (bounds.Max.X - bounds.Min.X) < 1 {

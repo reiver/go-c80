@@ -18,9 +18,9 @@ func (receiver *Type) Draw(img image.Image) error {
 	case *rgba32.Slice:
 		return receiver.DrawDye(casted)
 
-	case pel.RGBA:
+	case pel.ColorLinked:
 		return receiver.DrawPixel(casted.X, casted.Y, casted)
-	case *pel.RGBA:
+	case *pel.ColorLinked:
 		return receiver.DrawPixel(casted.X, casted.Y, casted)
 
 	default:
