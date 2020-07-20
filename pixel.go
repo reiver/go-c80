@@ -1,18 +1,22 @@
 package c80
 
 import (
-	"github.com/reiver/go-c80/pixel"
+	"github.com/reiver/go-pel"
+	"github.com/reiver/go-rgba32"
 
 	"image"
 )
 
-func Pixel(index uint8) image.Image {
-	r,g,b,a := machine.Palette().Color(index).Peek()
+func Pixel(x,y int, index uint8) image.Image {
+	rgba := machine.Palette().Color(index).(rgba32.Slice)
 
-	return c80pixel.Type{
-		R:r,
-		G:g,
-		B:b,
-		A:a,
+	return pel.RGBA{
+		X:x,
+		Y:y,
+
+		R: rgba[rgba32.OffsetRed],
+		G: rgba[rgba32.OffsetGreen],
+		B: rgba[rgba32.OffsetBlue],
+		A: rgba[rgba32.OffsetAlpha],
 	}
 }
