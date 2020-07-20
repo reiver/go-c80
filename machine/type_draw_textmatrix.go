@@ -2,8 +2,7 @@ package c80machine
 
 import (
 	"github.com/reiver/go-font8x8"
-
-	"github.com/reiver/go-c80/textmatrix"
+	"github.com/reiver/go-text32x36"
 
 	"image"
 	"image/draw"
@@ -15,7 +14,7 @@ func (receiver *Type) DrawTextMatrix() {
 	}
 
 	textmatrix := receiver.TextMatrix()
-	if textmatrix.IsNothing() {
+	if nil == textmatrix {
 		return
 	}
 
@@ -33,8 +32,8 @@ func (receiver *Type) DrawTextMatrix() {
 	const fontHeight = 8
 
 	for offset, character := range runes {
-		cx := offset % c80textmatrix.Width
-		cy := offset / c80textmatrix.Height
+		cx := offset % text32x36.Width
+		cy := offset / text32x36.Height
 
 		x := cx*fontWidth
 		y := cy*fontHeight

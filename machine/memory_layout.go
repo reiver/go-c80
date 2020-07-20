@@ -5,8 +5,7 @@ import (
 	"github.com/reiver/go-palette2048"
 	"github.com/reiver/go-spritesheet8x8x256"
 	"github.com/reiver/go-spritesheet32x32x256"
-
-	"github.com/reiver/go-c80/textmatrix"
+	"github.com/reiver/go-text32x36"
 )
 
 const (
@@ -26,7 +25,7 @@ const (
 	LEN_SPRITES32x32 = spritesheet32x32x256.ByteSize
 
 	PTR_TEXTMATRIX   = PTR_SPRITES32x32 + LEN_SPRITES32x32
-	LEN_TEXTMATRIX   = c80textmatrix.ByteSize
+	LEN_TEXTMATRIX   = text32x36.ByteSize
 )
 
 const memoryByteSize =

@@ -1,12 +1,11 @@
 package c80machine
 
 import (
-	"github.com/reiver/go-c80/textmatrix"
-
 	"github.com/reiver/go-frame256x288"
 	"github.com/reiver/go-palette2048"
 	"github.com/reiver/go-spritesheet8x8x256"
 	"github.com/reiver/go-spritesheet32x32x256"
+	"github.com/reiver/go-text32x36"
 )
 
 // Type represents a fantasy virtual machine.
@@ -95,17 +94,12 @@ func (receiver *Type) Sprites32x32() spritesheet32x32x256.Paletted {
 }
 
 // TextMatrix provides access to the machine's text matrix.
-func (receiver *Type) TextMatrix() c80textmatrix.Type {
+func (receiver *Type) TextMatrix() text32x36.Slice {
 	beginning := PTR_TEXTMATRIX
 	ending    := beginning + LEN_TEXTMATRIX
 
 	p := receiver.memory[beginning:ending]
 
-	x, err := c80textmatrix.Wrap(p)
-	if nil != err {
-		return c80textmatrix.Nothing()
-	}
-
-	return x
+	return text32x36.Slice(p)
 }
 
