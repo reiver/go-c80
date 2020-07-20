@@ -9,5 +9,5 @@ func (receiver *Type) DrawDye(color color.Color) error {
 		return errNilReceiver
 	}
 
-	return receiver.frame.Dye(color)
+	return receiver.Frame().Dye(color)
 }
