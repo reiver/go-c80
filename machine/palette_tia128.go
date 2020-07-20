@@ -1,4 +1,4 @@
-package c80
+package c80machine
 
 import (
 	"github.com/reiver/go-palette2048"
