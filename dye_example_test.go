@@ -8,8 +8,24 @@ import (
 
 func ExampleDye() {
 
-	// Make the entire raster image the color of color 3 in the (color) palette.
-	c80.Draw(c80.Dye(3), 0,0)
+	// Set the color palette to "vt".
+	err := c80.Colorize("vt")
+	if nil != err {
+		fmt.Printf("ERROR: could not set the palette: %s", err)
+		return
+	}
+
+	const bgIndex = 3 // 3 is yellow in the "vt" color palette.
+
+
+	// Clear the whole frame with the backgroud color.
+	//
+	// That means that every pixel of the frame will have the same color.
+	err = c80.Draw(c80.Dye(bgIndex))
+	if nil != err {
+		fmt.Printf("ERROR: could not clear the image with color at index=%d: %s", bgIndex, err)
+		return
+	}
 
 	// Show the raster image.
 	//
