@@ -12,6 +12,8 @@ func ExamplePixel() {
 	c80.Draw(c80.Dye(0))
 
 	// Draw something.
+	//
+	// What is draw is a sprite-art / pixel-art style ghost.
 	{
 		left := 20
 		top  := 30
