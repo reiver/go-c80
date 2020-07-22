@@ -28,3 +28,11 @@ func (receiver *Type) ColorModel() color.Model {
 
 	return receiver.frame().ColorModel()
 }
+
+func (receiver *Type) Set(x, y int, c color.Color) {
+	if nil == receiver {
+		return
+	}
+
+	receiver.frame().Set(x,y, c)
+}
