@@ -6,7 +6,7 @@ package c80
 //
 // Here are some examples of Colorize being used:
 //
-//	err := c80.Colorize("tia128")
+//	err := c80.Colorize("tia")
 func Colorize(a ...interface{}) error {
 	return machine.Colorize(a...)
 }
