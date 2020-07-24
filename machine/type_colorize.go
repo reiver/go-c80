@@ -2,6 +2,7 @@ package c80machine
 
 import (
 	"github.com/reiver/go-palette2048"
+	"github.com/reiver/go-palette2048_greer"
 	"github.com/reiver/go-palette2048_gruvbox"
 	"github.com/reiver/go-palette2048_html3"
 	"github.com/reiver/go-palette2048_nes"
@@ -42,6 +43,8 @@ func (receiver *Type) Colorize(a ...interface{}) error {
 	var p []byte
 	{
 		switch s0 {
+		case "greer":
+			p = palette2048_greer.Palette[:]
 		case "gruvbox":
 			p = palette2048_gruvbox.Palette[:]
 		case "html3":
