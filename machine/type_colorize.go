@@ -8,6 +8,7 @@ import (
 	"github.com/reiver/go-palette2048_html3"
 	"github.com/reiver/go-palette2048_lospec500"
 	"github.com/reiver/go-palette2048_nes"
+	"github.com/reiver/go-palette2048_rkbv"
 	"github.com/reiver/go-palette2048_solarized"
 	"github.com/reiver/go-palette2048_tia"
 )
@@ -57,6 +58,8 @@ func (receiver *Type) Colorize(a ...interface{}) error {
 			p = palette2048_lospec500.Palette[:]
 		case "nes":
 			p = palette2048_nes.Palette[:]
+		case "rkbv":
+			p = palette2048_rkbv.Palette[:]
 		case "solarized":
 			p = palette2048_solarized.Palette[:]
 		case "tia":
