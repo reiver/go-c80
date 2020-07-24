@@ -6,6 +6,7 @@ import (
 	"github.com/reiver/go-sprite8x8"
 
 	"fmt"
+	"image/color"
 )
 
 func ExampleSprite() {
@@ -17,10 +18,10 @@ func ExampleSprite() {
 		return
 	}
 
-	// These index values are specific to the "vt" color palette.
-	const black = 0
-	const blue  = 4
-	const white = 7
+	// Get the closest colors in the current palette to these colors.
+	var blue     uint8 = c80.ColorIndex(color.RGBA{0,0,255,0})
+	var white    uint8 = c80.ColorIndex(color.RGBA{255,255,255,255})
+	var trnsprnt uint8 = c80.ColorIndex(color.RGBA{0,0,0,0})
 
 
 
@@ -50,14 +51,14 @@ func ExampleSprite() {
 	//	█▀█▀▀█▄█
 	{
 		var buffer [8*8]uint8 = [8*8]uint8{
-			black, black, black, black, black, black, black, black,
-			black, black, black, black, black, black, black, black,
-			black, black, black, black, black, black, black, black,
-			black, black, black, black, black, black, black, black,
-			black, black, black, black, black, black, black, black,
-			black, black, black, black, black, white, white, white,
-			white, white, white, white, white, white, black, white,
-			white, black, white, black, black, white, white, white,
+			trnsprnt, trnsprnt, trnsprnt, trnsprnt, trnsprnt, trnsprnt, trnsprnt, trnsprnt,
+			trnsprnt, trnsprnt, trnsprnt, trnsprnt, trnsprnt, trnsprnt, trnsprnt, trnsprnt,
+			trnsprnt, trnsprnt, trnsprnt, trnsprnt, trnsprnt, trnsprnt, trnsprnt, trnsprnt,
+			trnsprnt, trnsprnt, trnsprnt, trnsprnt, trnsprnt, trnsprnt, trnsprnt, trnsprnt,
+			trnsprnt, trnsprnt, trnsprnt, trnsprnt, trnsprnt, trnsprnt, trnsprnt, trnsprnt,
+			trnsprnt, trnsprnt, trnsprnt, trnsprnt, trnsprnt, white,    white,    white,
+			white,    white,    white,    white,    white,    white,    trnsprnt, white,
+			white,    trnsprnt, white,    trnsprnt, trnsprnt, white,    white,    white,
 		}
 
 		sprite := c80.Sprite("8x8", id).(sprite8x8.Paletted)
@@ -95,6 +96,9 @@ func ExampleSprite() {
 	c80.Draw(c80.Relocate(x,y, c80.Sprite("8x8", id)))
 
 
+	// Here we draw a sprite at (x,y)=(200,180)
+	c80.Draw(c80.Relocate(200,180, c80.Sprite("8x8", 247)))
+
 
 	// Show the raster image.
 	//
@@ -107,5 +111,5 @@ func ExampleSprite() {
 	fmt.Print(serialized)
 
 	// Output:
-	// IMAGE:iVBORw0KGgoAAAANSUhEUgAAAQAAAAEgCAIAAADUvDoHAAADhUlEQVR4nOzXsY3iQBSAYbxySTtFXDO7vVwLFAE9uBV64AJLDg5ij8T/fYE1TPSC98t4XZbl8s7z5/b2Hj7J1+wBYCYBkCYA0gRA2vrf723b9sP39TFjHjjVemz8YYzxegkf6Wvf+P25H2w/Hcvl9z57BpjGRzBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBtnT1AzvL3z9v758/t9FnwBqBNAKQJgDQBkOYjeLJt2/bD9/Uxe5YiAZzt2PjDGOP1knP4CzTBGGN/7gfbP9Fy+b3PngGm8QYgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZD2LwAA///KYCVGxq8sfwAAAABJRU5ErkJggg==
+	// IMAGE:iVBORw0KGgoAAAANSUhEUgAAAQAAAAEgCAIAAADUvDoHAAADvUlEQVR4nOzdTW7bMBgAUX2Cb9Tc/wTplaKisSu0ibeyhM57K1orIuDoh1nwtizbAlXr2ROAMwmANAGQJgDSbl9+b38+iWdOmA282G37tgk0s3y/CP+ldb/ZzzwGVj8d4/8AlPkIJk0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEi7nT2Bum17DGZOnkmTAF5tX/G7mScXeQ2vQCe43+xnHgOr/0SzLP78dHkCkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDRHJHGgbXmcfDZXPYfFE4Cj7Kv/y/hSBMCB1s8DANeZ9aqHYDojjKPc7/o/39/vP9/efpw9oycEwCHuq3+/8X98HoV5wS8BH8Ec5ffbzzb/jK/3HuQJwFFm1s9TkD/2wdkzekIAHOLvDdArb4YKgDTboKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkPYrAAD//99QOU2R1Sq/AAAAAElFTkSuQmCC
 }
