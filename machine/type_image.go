@@ -3,7 +3,16 @@ package c80machine
 import (
 	"image"
 	"image/color"
+	"image/draw"
 )
+
+func (receiver *Type) Image() draw.Image {
+	if nil == receiver {
+		return nil
+	}
+
+	return receiver
+}
 
 func (receiver *Type) At(x, y int) color.Color {
 	if nil == receiver {
