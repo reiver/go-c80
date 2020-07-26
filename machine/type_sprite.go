@@ -23,7 +23,7 @@ func (receiver *Type) Sprite(kind string, id uint8) image.Image {
 	case "8x8":
 		return receiver.sprites8x8().Sprite(id)
 	case "32x32":
-		return receiver.Sprites32x32().Sprite(id)
+		return receiver.sprites32x32().Sprite(id)
 	case "tile":
 		return receiver.tiles().Sprite(id)
 	default:
@@ -51,7 +51,7 @@ func (receiver *Type) SetSprite(kind string, id uint8, img image.Image) error {
 	case "8x8":
 		dst = receiver.sprites8x8().Sprite(id)
 	case "32x32":
-		dst = receiver.Sprites32x32().Sprite(id)
+		dst = receiver.sprites32x32().Sprite(id)
 	case "tile":
 		dst = receiver.tiles().Sprite(id)
 	default:

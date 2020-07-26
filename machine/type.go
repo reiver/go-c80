@@ -82,7 +82,7 @@ func (receiver *Type) sprites8x8() spritesheet8x8x256.Paletted {
 	}
 }
 
-func (receiver *Type) sprites32x32() []uint8 {
+func (receiver *Type) _sprites32x32() []uint8 {
 	beginning := PTR_SPRITES32x32
 	ending    := beginning + LEN_SPRITES32x32
 
@@ -91,9 +91,9 @@ func (receiver *Type) sprites32x32() []uint8 {
 	return p
 }
 
-// Sprites32x32 provides access to the machine's sprite sheet for 32x32 pixel sprites.
-func (receiver *Type) Sprites32x32() spritesheet32x32x256.Paletted {
-	p := receiver.sprites32x32()
+// sprites32x32 provides access to the machine's sprite sheet for 32x32 pixel sprites.
+func (receiver *Type) sprites32x32() spritesheet32x32x256.Paletted {
+	p := receiver._sprites32x32()
 
 	return spritesheet32x32x256.Paletted{
 		Pix: p,
