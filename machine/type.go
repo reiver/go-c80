@@ -102,8 +102,8 @@ func (receiver *Type) sprites32x32() spritesheet32x32x256.Paletted {
 	}
 }
 
-// TextMatrix provides access to the machine's text matrix.
-func (receiver *Type) TextMatrix() text32x36.Slice {
+// textMatrix provides access to the machine's text matrix.
+func (receiver *Type) textMatrix() text32x36.Slice {
 	beginning := PTR_TEXTMATRIX
 	ending    := beginning + LEN_TEXTMATRIX
 

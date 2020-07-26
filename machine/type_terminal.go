@@ -5,5 +5,5 @@ func (receiver *Type) Terminal() Terminator {
 		return nil
 	}
 
-	return receiver.TextMatrix()
+	return receiver.textMatrix()
 }
