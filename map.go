@@ -4,6 +4,6 @@ import (
 	"image"
 )
 
-func Map(x int, y int, width int, height int) image.Image {
-	return machine.MapImage(x, y, width, height)
+func Map() image.Image {
+	return machine.Map()
 }

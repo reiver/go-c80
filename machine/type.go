@@ -33,6 +33,15 @@ func (receiver *Type) frame() frame256x288.Slice {
 	return frame256x288.Slice(p)
 }
 
+func (receiver *Type) tilemap() []uint8 {
+	beginning := PTR_TILEMAP
+	ending    := beginning + LEN_TILEMAP
+
+	p := receiver.memory[beginning:ending]
+
+	return p
+}
+
 func (receiver *Type) tiles() []uint8 {
 	beginning := PTR_TILES
 	ending    := beginning + LEN_TILES

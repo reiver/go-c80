@@ -6,6 +6,7 @@ import (
 	"github.com/reiver/go-spritesheet8x8x256"
 	"github.com/reiver/go-spritesheet32x32x256"
 	"github.com/reiver/go-text32x36"
+	"github.com/reiver/go-tilemap8x8x256x256"
 )
 
 const (
@@ -15,7 +16,10 @@ const (
 	PTR_FRAME        = PTR_PALETTE      + LEN_PALETTE
 	LEN_FRAME        = frame256x288.ByteSize
 
-	PTR_TILES        = PTR_FRAME        + LEN_FRAME
+	PTR_TILEMAP      = PTR_FRAME        + LEN_FRAME
+	LEN_TILEMAP      = tilemap8x8x256x256.ByteSize
+
+	PTR_TILES        = PTR_TILEMAP      + LEN_TILEMAP
 	LEN_TILES        = spritesheet8x8x256.ByteSize
 
 	PTR_SPRITES8x8   = PTR_TILES        + LEN_TILES
