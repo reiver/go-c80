@@ -62,7 +62,7 @@ func (receiver *Type) tiles() spritesheet8x8x256.Paletted {
 	}
 }
 
-func (receiver *Type) sprites8x8() []uint8 {
+func (receiver *Type) _sprites8x8() []uint8 {
 	beginning := PTR_SPRITES8x8
 	ending    := beginning + LEN_SPRITES8x8
 
@@ -71,9 +71,9 @@ func (receiver *Type) sprites8x8() []uint8 {
 	return p
 }
 
-// Sprites8x8 provides access to the machine's sprite sheet for 8x8 pixel sprites.
-func (receiver *Type) Sprites8x8() spritesheet8x8x256.Paletted {
-	p := receiver.sprites8x8()
+// sprites8x8 provides access to the machine's sprite sheet for 8x8 pixel sprites.
+func (receiver *Type) sprites8x8() spritesheet8x8x256.Paletted {
+	p := receiver._sprites8x8()
 
 	return spritesheet8x8x256.Paletted{
 		Pix: p,
