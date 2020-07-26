@@ -8,10 +8,11 @@ Example
 	
 	// ...
 	
+	c80.Colorize("tia")
+	
+	// ...
+	
 	c80.Draw(c80.Map(mapX,mapY, width,height))
 	c80.Draw(c80.Relocate(x,y, Sprite("32x32", id)))
-
-
-
 */
 package c80
