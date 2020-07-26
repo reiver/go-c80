@@ -35,6 +35,7 @@ const (
 const memoryByteSize =
 	LEN_PALETTE      +
 	LEN_FRAME        +
+	LEN_TILEMAP      +
 	LEN_TILES        +
 	LEN_SPRITES8x8   +
 	LEN_SPRITES32x32 +
