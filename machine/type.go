@@ -42,7 +42,7 @@ func (receiver *Type) tilemap() []uint8 {
 	return p
 }
 
-func (receiver *Type) tiles() []uint8 {
+func (receiver *Type) _tiles() []uint8 {
 	beginning := PTR_TILES
 	ending    := beginning + LEN_TILES
 
@@ -51,9 +51,9 @@ func (receiver *Type) tiles() []uint8 {
 	return p
 }
 
-// Tiles provides access to the machine's sprite sheet for 8x8 pixel sprite (background) tiles.
-func (receiver *Type) Tiles() spritesheet8x8x256.Paletted {
-	p := receiver.tiles()
+// tiles provides access to the machine's sprite sheet for 8x8 pixel sprite (background) tiles.
+func (receiver *Type) tiles() spritesheet8x8x256.Paletted {
+	p := receiver._tiles()
 
 	return spritesheet8x8x256.Paletted{
 		Pix: p,

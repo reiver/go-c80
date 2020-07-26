@@ -25,7 +25,7 @@ func (receiver *Type) Sprite(kind string, id uint8) image.Image {
 	case "32x32":
 		return receiver.Sprites32x32().Sprite(id)
 	case "tile":
-		return receiver.Tiles().Sprite(id)
+		return receiver.tiles().Sprite(id)
 	default:
 		return nil
 	}
@@ -53,7 +53,7 @@ func (receiver *Type) SetSprite(kind string, id uint8, img image.Image) error {
 	case "32x32":
 		dst = receiver.Sprites32x32().Sprite(id)
 	case "tile":
-		dst = receiver.Tiles().Sprite(id)
+		dst = receiver.tiles().Sprite(id)
 	default:
 		return errSpriteKindNotAllowed
 	}

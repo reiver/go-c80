@@ -14,7 +14,7 @@ func (receiver *Type) Map() image.Image {
 	return tilemap8x8x256x256.TileMap{
 		Map: receiver.tilemap(),
 		Tiles: func (id uint8) image.Image {
-			return receiver.Tiles().Sprite(id)
+			return receiver.tiles().Sprite(id)
 		},
 	}
 }
