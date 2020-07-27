@@ -11,7 +11,7 @@ var (
 )
 
 func init() {
-	if err := Colorize("vt"); nil != err {
+	if err := Colorize("lospec500"); nil != err {
 		panic(err)
 	}
 
