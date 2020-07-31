@@ -15,7 +15,7 @@ import (
 
 func TestDye(t *testing.T) {
 
-	c80.Colorize("tia128")
+	c80.Colorize("tia")
 
 	Loop: for index:=0; index<c80palette.Len; index++ {
 
